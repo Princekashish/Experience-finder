@@ -2,6 +2,8 @@ import React from "react";
 import HeroSection from "../../view/HeroSection";
 import AI from "../../view/AI";
 import { useNavigate } from "react-router-dom";
+import Need from "../../view/AI/Need";
+import Reviews from "../../view/AI/Reviews";
 
 const index: React.FC = () => {
 
@@ -26,6 +28,8 @@ const index: React.FC = () => {
     <div>
       <HeroSection handleSubmit={handleButtonClick} />
       <AI />
+      <Need />
+      <Reviews/>
     </div>
   );
 };

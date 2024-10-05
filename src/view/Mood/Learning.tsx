@@ -119,7 +119,7 @@ const Learning: React.FC = () => {
                   placeholder="Example: Computer Science, DSA, Mathematics, Physics, Chemistry"
                   value={learningData.subject}
                   onChange={handleInputChange}
-                  className="px-3 py-3 border-[.3px] w-full  bg-black"
+                  className="px-3 py-3 border-[.3px] w-full  border-black"
                 />
               </div>
 
@@ -132,7 +132,7 @@ const Learning: React.FC = () => {
                   value={learningData.month}
                   onChange={handleInputChange}
                   placeholder="Example: 3 months, 6 months or for Exam"
-                  className="px-3 py-3 border-[.3px] w-full  bg-black"
+                  className="px-3 py-3 border-[.3px] w-full  border-black"
                 />
               </div>
 
@@ -144,7 +144,7 @@ const Learning: React.FC = () => {
                   name="hourperday" // Corrected name from "duration" to "hourperday"
                   value={learningData.hourperday}
                   onChange={handleInputChange}
-                  className="px-3  py-3 border-[.3px] w-full  bg-black"
+                  className="px-3  py-3 border-[.3px] w-full  border-black"
                   placeholder="Example: 2 hours, 3 hours"
                 />
               </div>
@@ -152,7 +152,7 @@ const Learning: React.FC = () => {
               <FormButton
                 type="submit"
                 disabled={loading}
-                className="bg-zinc-200 px-3 py-3 w-full text-black rounded-lg flex justify-center items-center"
+                className="bg-black hover:bg-zinc-900  px-3 py-3 w-full text-white rounded-lg flex justify-center items-center"
                 startIcon={
                   loading ? <CgSpinner className="animate-spin" /> : null
                 }

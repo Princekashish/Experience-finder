@@ -1,6 +1,6 @@
 import React from "react";
 import FormButton from "../../components/base/FormButton";
-import { CiPlay1 } from "react-icons/ci";
+import { Telescope } from "lucide-react";
 
 interface heroSubmit {
   handleSubmit?: () => void;
@@ -10,7 +10,7 @@ const HomePage: React.FC<heroSubmit> = ({ handleSubmit }) => {
 
   return (
     <div>
-      <section className="bg-cover h-[90vh] flex flex-col justify-center items-center text-center px-6 font-intra">
+      <section className="bg-cover  h-[75vh] md:h-[80vh] flex flex-col justify-center items-center text-center px-6 font-intra">
         <h1 className="text-5xl font-bold mb-4">
           Discover Experiences That Speak to Your Soul
         </h1>
@@ -21,8 +21,8 @@ const HomePage: React.FC<heroSubmit> = ({ handleSubmit }) => {
         <FormButton
           onClick={handleSubmit}
           label="Start Your Thought"
-          className="bg-green-600 rounded-full p-3 text-white flex items-center"
-          startIcon={<CiPlay1 size={25} />} 
+          className="bg-[#00501E] rounded-full p-3 text-white  w-[230px] flex justify-center items-center"
+          startIcon={<Telescope size={25} />} 
         />
       </section>
     </div>

@@ -118,12 +118,13 @@ const Relaxation: React.FC = () => {
   return (
     <>
       {/* <AuthStatus onAuthChange={handleAuth} /> */}
-      <div className="min-h-screen flex  flex-col justify-start items-start  pt-24">
+      <div className=" flex  flex-col justify-start items-start  ">
         {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
-        <div className=" md:text-[2em] text-start   md:w-full">
+        <div className=" md:text-[2em] text-start   md:w-full flex flex-col justify-center items-center gap-3">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
             Adventure
           </h1>
+          <p className="text-lg tracking-wider text-center "  >Plain you Adventure day using AI</p>
         </div>
         <div className="flex  md:w-full p-5 md:justify-center">
           <form
@@ -138,7 +139,7 @@ const Relaxation: React.FC = () => {
                 placeholder="🗺️ Location"
                 value={formData.place}
                 onChange={handleInputChange}
-                className="px-3 py-3 border-[.3px] w-full  bg-black"
+                className="px-3 py-3 border-[.3px] w-full border-black"
               />
             </div>
 
@@ -151,7 +152,7 @@ const Relaxation: React.FC = () => {
                 value={formData.people}
                 onChange={handleInputChange}
                 placeholder="🧑‍🤝‍🧑 Number of People"
-                className="px-3 py-3 border-[.3px] w-full  bg-black"
+                className="px-3 py-3 border-[.3px] w-full border-black"
               />
             </div>
 
@@ -163,7 +164,7 @@ const Relaxation: React.FC = () => {
                 name="duration"
                 value={formData.duration}
                 onChange={handleInputChange}
-                className="px-3 w-full py-3 border-[.3px] bg-black"
+                className="px-3 w-full py-3 border-[.3px] border-black"
                 placeholder="⌚ Duration"
               />
             </div>
@@ -181,7 +182,7 @@ const Relaxation: React.FC = () => {
                 className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer   accent-blue-500"
               />
               <div>
-                <span className="text-zinc-200 text-sm font-medium">
+                <span className="text-black text-sm font-medium">
                   Rs. {formData.budget}
                 </span>
               </div>
@@ -199,7 +200,7 @@ const Relaxation: React.FC = () => {
                     }
                     className={`flex flex-col h-[120px]  justify-center items-center rounded-xl shadow shadow-white cursor-pointer  ${
                       formData.planningWith === item.value
-                        ? "border-white border-[1px]"
+                        ? "border-black border-[1px]"
                         : ""
                     }`}
                   >
@@ -214,7 +215,7 @@ const Relaxation: React.FC = () => {
             <FormButton
               type="submit"
               disabled={loading}
-              className="focus:scale-110 hover:scale-110 hover:bg-zinc-900 active:scale-105 transition bg-zinc-900 px-3 py-3 w-full rounded-lg flex justify-center items-center"
+              className=" hover:bg-zinc-900  bg-black px-3 py-3 w-full rounded-lg flex justify-center items-center text-white"
               startIcon={
                 loading ? <CgSpinner className="animate-spin" /> : null
               } // Show spinner when loading
