@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         password
       );
       console.log("User logged in: ", userCredential.user);
-      onClose(); // Close the popup on successful login
+
     } catch (err: any) {
       setError(err.message);
       console.error("Login error: ", err.message);

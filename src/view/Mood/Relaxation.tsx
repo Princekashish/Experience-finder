@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormInput from "../../components/base/FormInput";
 import FormButton from "../../components/base/FormButton";
 import planningWithOptions, { AI_Prompt_Relaxation } from "../../lib/data";
-import toast, { LoaderIcon, Toaster } from "react-hot-toast";
+import toast, {  Toaster } from "react-hot-toast";
 import { chatSession } from "../../lib/Service/Aimodel";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../lib/config/Firebase";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/shared/Form/LoginForm";
-import AuthStatus from "../../components/custom/AuthStatus";
 import { CgSpinner } from "react-icons/cg";
-import { MapPin } from "lucide-react";
 
 const Relaxation: React.FC = () => {
-  const [isUser, setIsUser] = useState<boolean>(false);
-  const [userUID, setUserUID] = useState<string | null>(null);
   const [dialogbox, setDialogbox] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
@@ -51,16 +47,16 @@ const Relaxation: React.FC = () => {
   // }, []);
 
   // Handle user authentication and save UID in state/localStorage
-  const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
-    setIsUser(isAuthenticated);
-    if (isAuthenticated && uid) {
-      setUserUID(uid);
-      localStorage.setItem("user", uid);
-    } else {
-      setUserUID(null);
-      localStorage.removeItem("user");
-    }
-  };
+  // const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
+  //   setIsUser(isAuthenticated);
+  //   if (isAuthenticated && uid) {
+  //     setUserUID(uid);
+  //     localStorage.setItem("user", uid);
+  //   } else {
+  //     setUserUID(null);
+  //     localStorage.removeItem("user");
+  //   }
+  // };
 
   // Generate relaxation plan if the user is authenticated
   const generatePlan = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -121,7 +117,7 @@ const Relaxation: React.FC = () => {
 
   return (
     <>
-      <AuthStatus onAuthChange={handleAuth} />
+      {/* <AuthStatus onAuthChange={handleAuth} /> */}
       <div className="min-h-screen flex  flex-col justify-start items-start  pt-24">
         {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
         <div className=" md:text-[2em] text-start   md:w-full">

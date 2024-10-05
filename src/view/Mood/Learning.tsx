@@ -12,8 +12,6 @@ import FormButton from "../../components/base/FormButton";
 import { CgSpinner } from "react-icons/cg";
 
 const Learning: React.FC = () => {
-  const [isUser, setIsUser] = useState<boolean>(false);
-  const [userUID, setUserUID] = useState<string | null>(null);
   const [dialogbox, setDialogbox] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [learningData, setLearningData] = useState({
@@ -34,16 +32,16 @@ const Learning: React.FC = () => {
   };
 
   // Handle user authentication and save UID in state/localStorage
-  const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
-    setIsUser(isAuthenticated);
-    if (isAuthenticated && uid) {
-      setUserUID(uid);
-      localStorage.setItem("user", uid);
-    } else {
-      setUserUID(null);
-      localStorage.removeItem("user");
-    }
-  };
+  // const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
+  //   setIsUser(isAuthenticated);
+  //   if (isAuthenticated && uid) {
+  //     setUserUID(uid);
+  //     localStorage.setItem("user", uid);
+  //   } else {
+  //     setUserUID(null);
+  //     localStorage.removeItem("user");
+  //   }
+  // };
 
   // Generate relaxation plan if the user is authenticated
   const generatePlan = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,7 +99,7 @@ const Learning: React.FC = () => {
   return (
     <div>
       <>
-        <AuthStatus onAuthChange={handleAuth} />
+        {/* <AuthStatus onAuthChange={handleAuth} /> */}
         <div className="min-h-screen flex  flex-col justify-start items-start  ">
           {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
           <div className=" md:text-[2em] text-start   md:w-full">
@@ -158,10 +156,9 @@ const Learning: React.FC = () => {
                 className="bg-zinc-200 px-3 py-3 w-full text-black rounded-lg flex justify-center items-center"
                 startIcon={
                   loading ? <CgSpinner className="animate-spin" /> : null
-                } // Show spinner when loading
+                }
               >
                 {loading ? "Loading..." : "Generate Your Plan"}{" "}
-                {/* Conditional label */}
               </FormButton>
             </form>
           </div>

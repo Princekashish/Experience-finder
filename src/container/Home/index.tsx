@@ -6,20 +6,20 @@ import { auth } from "../../lib/config/Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const index: React.FC = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsUserLoggedIn(true);
-      } else {
-        setIsUserLoggedIn(false);
-      }
-    });
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setIsUserLoggedIn(true);
+  //     } else {
+  //       setIsUserLoggedIn(false);
+  //     }
+  //   });
 
-    return () => unsubscribe();
-  }, []);
+  //   return () => unsubscribe();
+  // }, []);
 
   const handleButtonClick = () => {
     navigate("/dasboard");

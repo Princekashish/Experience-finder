@@ -6,12 +6,10 @@ interface AuthStatusProps {
 }
 
 const AuthStatus: React.FC<AuthStatusProps> = ({ onAuthChange }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const auth = getAuth();  
+  const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
       onAuthChange(!!user, user?.uid || null);
     });
 
