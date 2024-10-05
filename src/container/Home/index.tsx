@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HeroSection from "../../view/HeroSection";
 import AI from "../../view/AI";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../lib/config/Firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 const index: React.FC = () => {
 

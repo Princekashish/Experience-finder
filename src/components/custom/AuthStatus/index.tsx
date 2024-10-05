@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 interface AuthStatusProps {
   onAuthChange: (isAuthenticated: boolean, userEmail?: string | null) => void;

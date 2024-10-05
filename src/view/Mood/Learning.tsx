@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AuthStatus from "../../components/custom/AuthStatus";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AI_Prompt_Learning } from "../../lib/data";
