@@ -13,7 +13,7 @@ const Need: React.FC = () => {
             over others.
           </p>
         </div>
-       <div className="grid xl:grid-cols-3 grid-cols-1 gap-5  p-24 ">
+       <div className="grid xl:grid-cols-3 grid-cols-1 gap-5  xl:p-24 ">
        <div className="border h-[160px] xl:h-[180px] text-center flex justify-center items-center flex-col rounded-2xl p-5 gap-2">
             <h1 className="font-bold text-xl">AI-Powered</h1>
             <p className="text-[#616161] ">Personalized recommendations based on your preferences.</p>

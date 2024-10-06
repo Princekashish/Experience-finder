@@ -9,14 +9,14 @@ const Expresion: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-5 h-[80vh] gap-16 ">
+    <div className="flex flex-col justify-center items-center p-5  gap-16 font-intra ">
       <div className=" flex justify-center items-center flex-col ">
-        <h1 className="text-[3em] font-bold ">
+        <h1 className="xl:text-[3em] text-[1.5em] font-bold ">
           Diverse <span className="text-[#C8A0FF]">Experience Modes</span>
         </h1>
-        <p className="text-[#616161] text-[1.3em]"> Explore a variety of modes</p>
+        <p className="text-[#616161] text-base"> Explore a variety of modes</p>
       </div>
-      <div className="grid grid-cols-2 gap-5 md:grid-cols-none md:grid-rows-none md:flex">
+      <div className="grid grid-cols-1  gap-5 md:grid-cols-none md:grid-rows-none md:flex">
         <div
           onClick={() => navigatemood("relaxation")}
           className="cursor-pointer hover:scale-110 transform duration-300 ease-in-out h-[230px] w-[260px] rounded-xl flex justify-center items-center shadow-md bg-[url('https://images.unsplash.com/photo-1489914169085-9b54fdd8f2a2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-no-repeat bg-center"

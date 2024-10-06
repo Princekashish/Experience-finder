@@ -7,26 +7,26 @@ const Reviews: React.FC = () => {
   const Testmonials = [
     {
       userName: "Emily Johnson",
-      userImageUrl: "/rev (1).jpg",
+      userImageUrl: "/rev (2).jpg",
       testimonial:
         "The tailored adventure planning was a game-changer! I never thought my dream trip could be so perfectly aligned with my interests. Every detail was seamless and stress-free.",
     },
     {
       userName: "Michael Davis",
-      userImageUrl: "/rev (2).jpg",
+      userImageUrl: "/rev (3).jpg",
       testimonial:
         "This platform made planning with my friends so easy! We discovered new places, had amazing experiences, and everything was personalized for our group.",
     },
     {
       userName: "Sarah Lee",
-      userImageUrl: "/rev (3).jpg",
+      userImageUrl: "/rev (1).jpg",
       testimonial:
         "Planning my solo getaway was such a breeze. I loved how every activity felt like it was chosen just for me. The perfect balance of relaxation and adventure!",
     },
   ];
   return (
     <>
-      <div className="font-intra p-5 mt-6">
+      <div className="font-intra p-5 mt-6 ">
         <div className="flex flex-col justify-center items-center gap-4">
           <h1 className="text-center leading-none text-[2em] font-extrabold xl:text-[3em]">
             Don't Just Take Our Word for It
@@ -63,17 +63,17 @@ const Reviews: React.FC = () => {
               {Testmonials.map((items, i) => (
                 <SwiperSlide
                   key={i}
-                  className="h-[320px] md:text-xl md:p-10 rounded-2xl flex flex-col justify-start items-center bg-[#ECEBEB]  pt-5 flex-wrap"
+                  className="h-[320px] md:text-xl md:p-10 rounded-2xl flex flex-col justify-start items-center border border-black  pt-5 flex-wrap"
                 >
                   <p className="p-2 text-base tracking-tight font-light mt-5 text-center">
                     {items.testimonial}
                   </p>
                   <div className="flex justify-start items-center mt-10 gap-5">
-                    {/* <img
+                    <img
                         src={items.userImageUrl}
                         alt=""
                         className="rounded-full h-[46px] w-[47px]"
-                      /> */}
+                      />
                     <div className="flex flex-col justify-start items-start">
                       <h1>{items.userName}</h1>
                     </div>
@@ -101,7 +101,7 @@ const Reviews: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center items-center pointer-events-none">
-        <img src="/websitess.jpg" alt="" />
+        <img src="/websitess.jpg" alt="" className="" />
       </div>
     </>
   );

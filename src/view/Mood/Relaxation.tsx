@@ -120,16 +120,16 @@ const Relaxation: React.FC = () => {
       {/* <AuthStatus onAuthChange={handleAuth} /> */}
       <div className=" flex  flex-col justify-start items-start  ">
         {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
-        <div className=" md:text-[2em] text-start   md:w-full flex flex-col justify-center items-center gap-3">
+        <div className=" md:text-[2em] xl:text-start   md:w-full flex flex-col justify-center items-center gap-3  w-full">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
             Adventure
           </h1>
-          <p className="text-lg tracking-wider text-center "  >Plain you Adventure day using AI</p>
+          <p className="xl:text-lg text-sm tracking-wider text-center "  >Plain you Adventure day using AI</p>
         </div>
-        <div className="flex  md:w-full p-5 md:justify-center">
+        <div className="flex  md:w-full p-5 md:justify-center justify-center w-full">
           <form
             onSubmit={generatePlan}
-            className="flex  flex-col gap-5 md:w-3/5"
+            className="flex  flex-col gap-5 md:w-3/5   "
           >
             <div className="flex flex-col gap-5">
               <h1>Where would you like to relax?</h1>
@@ -191,7 +191,7 @@ const Relaxation: React.FC = () => {
             {/* Planning With */}
             <div className="w-full">
               <h1>Who Are You Planning With?</h1>
-              <div className="grid grid-cols-4 gap-5 p-5">
+              <div className="grid grid-cols-2 xl:grid-cols-4  gap-5 p-5">
                 {planningWithOptions.map((item, index) => (
                   <div
                     key={index}

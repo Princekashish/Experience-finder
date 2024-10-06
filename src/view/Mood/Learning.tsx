@@ -99,9 +99,9 @@ const Learning: React.FC = () => {
     <div>
       <>
         {/* <AuthStatus onAuthChange={handleAuth} /> */}
-        <div className="min-h-screen flex  flex-col justify-start items-start  ">
+        <div className=" flex  flex-col justify-start items-start  ">
           {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
-          <div className=" md:text-[2em] text-start   md:w-full">
+          <div className=" md:text-[2em] xl:text-start text-center w-full   md:w-full">
             <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
               Learning Plan
             </h1>
@@ -116,7 +116,7 @@ const Learning: React.FC = () => {
                 <FormInput
                   type="text"
                   name="subject"
-                  placeholder="Example: Computer Science, DSA, Mathematics, Physics, Chemistry"
+                  placeholder="Topic name"
                   value={learningData.subject}
                   onChange={handleInputChange}
                   className="px-3 py-3 border-[.3px] w-full  border-black"
@@ -131,7 +131,7 @@ const Learning: React.FC = () => {
                   name="month" // Corrected name from "people" to "month"
                   value={learningData.month}
                   onChange={handleInputChange}
-                  placeholder="Example: 3 months, 6 months or for Exam"
+                  placeholder="For Exam or For Months"
                   className="px-3 py-3 border-[.3px] w-full  border-black"
                 />
               </div>
