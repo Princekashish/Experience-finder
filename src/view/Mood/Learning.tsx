@@ -103,7 +103,6 @@ const Learning: React.FC = () => {
       <div className="flex flex-col justify-start items-start">
         {dialogbox && (
           <LoginForm
-            onAuthChange={handleAuthChange}
             onClose={() => setDialogbox(false)}
           />
         )}

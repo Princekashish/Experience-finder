@@ -6,11 +6,11 @@ import { auth } from "../../../lib/config/Firebase";
 import SignUpForm from "./SignupForm";
 
 interface LoginFormProps {
-  onAuthChange: (isAuthenticated: boolean, userEmail?: string | null) => void;
+  // onAuthChange: (isAuthenticated: boolean, userEmail?: string | null) => void;
   onClose: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onAuthChange, onClose }) => {
+const LoginForm: React.FC<LoginFormProps> = ({  onClose }) => {
   const [error, setError] = useState<string | null>(null);
   const [isSignup, setIsSignup] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<{
@@ -34,8 +34,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onAuthChange, onClose }) => {
         password
       );
       console.log("User logged in: ", userCredential.user);
-      onAuthChange(true, userCredential.user.email); // Update auth status
-      onClose(); // Close the login form
+      // onAuthChange(true, userCredential.user.email); // Update auth status
+      onClose();
     } catch (err: any) {
       setError(err.message || "Login failed. Please try again.");
       console.error("Login error: ", err.message);
