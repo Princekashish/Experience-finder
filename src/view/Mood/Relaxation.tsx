@@ -47,7 +47,7 @@ const Relaxation: React.FC = () => {
     // Check if user is authenticated
     if (!isAuthenticated) {
       toast.error("You need to log in to generate a plan.");
-      setDialogbox(true); 
+      setDialogbox(true);
       return;
     }
 
@@ -114,7 +114,7 @@ const Relaxation: React.FC = () => {
       setUserEmail(null);
     }
   };
-
+  console.log(userEmail);
   return (
     <>
       <div className="flex flex-col justify-start items-start">
@@ -224,7 +224,10 @@ const Relaxation: React.FC = () => {
         </div>
         {dialogbox && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <LoginForm  onAuthChange={handleAuthChange} onClose={() => setDialogbox(false)} />
+            <LoginForm
+              onAuthChange={handleAuthChange}
+              onClose={() => setDialogbox(false)}
+            />
           </div>
         )}
         <Toaster />

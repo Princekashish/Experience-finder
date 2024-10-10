@@ -1,32 +1,24 @@
-import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useEffect } from "react";
+import { auth } from "../../../lib/config/Firebase"; // Import Firebase auth
 
 interface AuthStatusProps {
   onAuthChange: (isAuthenticated: boolean, userEmail?: string | null) => void;
 }
 
 const AuthStatus: React.FC<AuthStatusProps> = ({ onAuthChange }) => {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const auth = getAuth();
-
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      const email = user?.email || null;
-
-      if (email) {
-        localStorage.setItem("user_email", email);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        onAuthChange(true, user.email);
       } else {
-        localStorage.removeItem("user_email");
+        onAuthChange(false);
       }
-
-      setUserEmail(email);
-      onAuthChange(!!email, email);
     });
 
-    return () => unsubscribe();
-  }, [auth, onAuthChange]);
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, [onAuthChange]);
 
-  return null; // No UI rendered
+  return null; // This component does not render anything itself
 };
 
 export default AuthStatus;

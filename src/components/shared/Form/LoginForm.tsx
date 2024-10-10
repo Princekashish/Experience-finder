@@ -34,8 +34,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onAuthChange, onClose }) => {
         password
       );
       console.log("User logged in: ", userCredential.user);
-      onAuthChange(true, userCredential.user.email);
-      onClose();
+      onAuthChange(true, userCredential.user.email); // Update auth status
+      onClose(); // Close the login form
     } catch (err: any) {
       setError(err.message || "Login failed. Please try again.");
       console.error("Login error: ", err.message);
@@ -87,7 +87,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onAuthChange, onClose }) => {
               <FormButton
                 label="Login"
                 className="py-3 bg-black w-full text-white rounded-lg"
-                type="submit" // Ensure button type is submit
+                type="submit"
               />
             </form>
             <h1
