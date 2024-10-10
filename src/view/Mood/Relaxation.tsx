@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import FormInput from "../../components/base/FormInput";
 import FormButton from "../../components/base/FormButton";
 import planningWithOptions, { AI_Prompt_Relaxation } from "../../lib/data";
-import toast, {  Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { chatSession } from "../../lib/Service/Aimodel";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../lib/config/Firebase";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "../../components/shared/Form/LoginForm";
 import { CgSpinner } from "react-icons/cg";
+import AuthStatus from "../../components/custom/AuthStatus";
+import LoginForm from "../../components/shared/Form/LoginForm";
 
 const Relaxation: React.FC = () => {
   const [dialogbox, setDialogbox] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     place: "",
@@ -37,37 +40,18 @@ const Relaxation: React.FC = () => {
     setFormData({ ...formData, budget: e.target.value });
   };
 
-  // Check authentication and retrieve user UID from localStorage
-  // useEffect(() => {
-  //   const storedUID = localStorage.getItem("user_uid");
-  //   if (storedUID) {
-  //     setIsUser(true);
-  //     setUserUID(storedUID);
-  //   }
-  // }, []);
-
-  // Handle user authentication and save UID in state/localStorage
-  // const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
-  //   setIsUser(isAuthenticated);
-  //   if (isAuthenticated && uid) {
-  //     setUserUID(uid);
-  //     localStorage.setItem("user", uid);
-  //   } else {
-  //     setUserUID(null);
-  //     localStorage.removeItem("user");
-  //   }
-  // };
-
   // Generate relaxation plan if the user is authenticated
   const generatePlan = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const user = localStorage.getItem("user");
-    if (!user) {
-      setDialogbox(true);
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      toast.error("You need to log in to generate a plan.");
+      setDialogbox(true); 
       return;
     }
 
+    // Validate form data
     if (
       (Number(formData.duration) > 10 && !formData.place) ||
       !formData.duration ||
@@ -78,7 +62,9 @@ const Relaxation: React.FC = () => {
       setLoading(false);
       return;
     }
+
     setLoading(true);
+
     // Create AI prompt and get the plan
     const FINAL_PROMPT = AI_Prompt_Relaxation.replace(
       "{location}",
@@ -87,6 +73,7 @@ const Relaxation: React.FC = () => {
       .replace("{duration}", formData.duration)
       .replace("{goingWith}", formData.planningWith)
       .replace("{price}", formData.budget);
+
     try {
       const result = await chatSession.sendMessage(FINAL_PROMPT);
       SaveAIData(result?.response?.text());
@@ -95,6 +82,7 @@ const Relaxation: React.FC = () => {
     } catch (error) {
       toast.error("Error generating plan.");
       console.error(error);
+      setLoading(false);
     }
   };
 
@@ -115,22 +103,36 @@ const Relaxation: React.FC = () => {
     navigate(`/dashboard/${docID}`);
   };
 
+  const handleAuthChange = (
+    isAuthenticated: boolean,
+    userEmail?: string | null
+  ) => {
+    setIsAuthenticated(isAuthenticated);
+    if (userEmail !== undefined) {
+      setUserEmail(userEmail);
+    } else {
+      setUserEmail(null);
+    }
+  };
+
   return (
     <>
-      {/* <AuthStatus onAuthChange={handleAuth} /> */}
-      <div className=" flex  flex-col justify-start items-start  ">
-        {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
-        <div className=" md:text-[2em] xl:text-start   md:w-full flex flex-col justify-center items-center gap-3  w-full">
-          <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
+      <div className="flex flex-col justify-start items-start">
+        <AuthStatus onAuthChange={handleAuthChange} />
+        <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full">
+          <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
             Adventure
           </h1>
-          <p className="xl:text-lg text-sm tracking-wider text-center "  >Plain you Adventure day using AI</p>
+          <p className="xl:text-lg text-sm tracking-wider text-center">
+            Plan your Adventure day using AI
+          </p>
         </div>
-        <div className="flex  md:w-full p-5 md:justify-center justify-center w-full">
+        <div className="flex md:w-full p-5 md:justify-center justify-center w-full">
           <form
             onSubmit={generatePlan}
-            className="flex  flex-col gap-5 md:w-3/5   "
+            className="flex flex-col gap-5 md:w-3/5"
           >
+            {/* Form inputs go here */}
             <div className="flex flex-col gap-5">
               <h1>Where would you like to relax?</h1>
               <FormInput
@@ -143,7 +145,6 @@ const Relaxation: React.FC = () => {
               />
             </div>
 
-            {/* People Input */}
             <div className="flex flex-col gap-5">
               <h1>How many people will be joining you?</h1>
               <FormInput
@@ -156,8 +157,7 @@ const Relaxation: React.FC = () => {
               />
             </div>
 
-            {/* Duration */}
-            <div className=" flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
               <h1>How long do you want to relax?</h1>
               <FormInput
                 type="text"
@@ -169,8 +169,7 @@ const Relaxation: React.FC = () => {
               />
             </div>
 
-            {/* Budget Range */}
-            <div className=" flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
               <h1>What is your budget range?</h1>
               <input
                 type="range"
@@ -179,7 +178,7 @@ const Relaxation: React.FC = () => {
                 max="5000"
                 value={formData.budget}
                 onChange={handleBudgetChange}
-                className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer   accent-blue-500"
+                className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer accent-blue-500"
               />
               <div>
                 <span className="text-black text-sm font-medium">
@@ -188,17 +187,16 @@ const Relaxation: React.FC = () => {
               </div>
             </div>
 
-            {/* Planning With */}
             <div className="w-full">
               <h1>Who Are You Planning With?</h1>
-              <div className="grid grid-cols-2 xl:grid-cols-4  gap-5 p-5">
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 p-5">
                 {planningWithOptions.map((item, index) => (
                   <div
                     key={index}
                     onClick={() =>
                       setFormData({ ...formData, planningWith: item.value })
                     }
-                    className={`flex flex-col h-[120px]  justify-center items-center rounded-xl shadow shadow-white cursor-pointer  ${
+                    className={`flex flex-col h-[120px] justify-center items-center rounded-xl shadow shadow-white cursor-pointer ${
                       formData.planningWith === item.value
                         ? "border-black border-[1px]"
                         : ""
@@ -215,16 +213,20 @@ const Relaxation: React.FC = () => {
             <FormButton
               type="submit"
               disabled={loading}
-              className=" hover:bg-zinc-900  bg-black px-3 py-3 w-full rounded-lg flex justify-center items-center text-white"
+              className="hover:bg-zinc-900 bg-black px-3 py-3 w-full rounded-lg flex justify-center items-center text-white"
               startIcon={
                 loading ? <CgSpinner className="animate-spin" /> : null
               } // Show spinner when loading
             >
-              {loading ? "Loading..." : "Generate Your Plan 🛫"}{" "}
-              {/* Conditional label */}
+              {loading ? "Loading..." : "Generate Your Plan 🛫"}
             </FormButton>
           </form>
         </div>
+        {dialogbox && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <LoginForm  onAuthChange={handleAuthChange} onClose={() => setDialogbox(false)} />
+          </div>
+        )}
         <Toaster />
       </div>
     </>

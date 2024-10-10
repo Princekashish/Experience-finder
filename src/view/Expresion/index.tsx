@@ -9,7 +9,7 @@ const Expresion: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-5  gap-16 font-intra ">
+    <div className="flex flex-col justify-center items-center p-5  gap-16 font-intraz ">
       <div className=" flex justify-center items-center flex-col ">
         <h1 className="xl:text-[3em] text-[1.5em] font-bold ">
           Diverse <span className="text-[#C8A0FF]">Experience Modes</span>

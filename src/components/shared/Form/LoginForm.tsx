@@ -6,24 +6,20 @@ import { auth } from "../../../lib/config/Firebase";
 import SignUpForm from "./SignupForm";
 
 interface LoginFormProps {
+  onAuthChange: (isAuthenticated: boolean, userEmail?: string | null) => void;
   onClose: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onAuthChange, onClose }) => {
   const [error, setError] = useState<string | null>(null);
-  const [isSignup, setIsSignup] = useState<boolean>(false); // Control for showing signup form
+  const [isSignup, setIsSignup] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<{
     email: string;
     password: string;
-  }>({
-    email: "",
-    password: "",
-  });
+  }>({ email: "", password: "" });
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
-
     const { email, password } = loginData;
 
     if (!email || !password) {
@@ -38,9 +34,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         password
       );
       console.log("User logged in: ", userCredential.user);
-
+      onAuthChange(true, userCredential.user.email);
+      onClose();
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || "Login failed. Please try again.");
       console.error("Login error: ", err.message);
     }
   };
@@ -50,16 +47,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCloseSignup = () => {
+    setIsSignup(false);
+  };
+
   return (
     <>
       {!isSignup ? (
-        <div className="bg-black absolute top-0 h-screen w-full left-0 flex justify-center items-center">
+        <div className="bg-black fixed top-0 bottom-0 w-full left-0 flex justify-center items-center">
           <div className="bg-white w-[420px] min-h-[270px] gap-5 flex flex-col justify-center items-start p-5 rounded-2xl">
             <h1 className="text-2xl font-bold">Login</h1>
             <form
               onSubmit={handleLogin}
               className="flex flex-col justify-center gap-5 w-full"
             >
+              <label htmlFor="email" className="sr-only">
+                Email
+              </label>
               <FormInput
                 type="email"
                 name="email"
@@ -68,6 +72,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                 placeholder="Email"
                 className="border-black border py-2 px-2"
               />
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <FormInput
                 type="password"
                 name="password"
@@ -79,11 +86,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
               {error && <p className="text-red-500">{error}</p>}
               <FormButton
                 label="Login"
-                className=" py-3 bg-black w-full text-white rounded-lg"
+                className="py-3 bg-black w-full text-white rounded-lg"
+                type="submit" // Ensure button type is submit
               />
             </form>
             <h1
-              onClick={() => setIsSignup(true)} // Toggle to show signup form
+              onClick={() => setIsSignup(true)}
               className="text-sm text-blue-600 underline font-semibold cursor-pointer"
             >
               Signup
@@ -91,7 +99,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
           </div>
         </div>
       ) : (
-        <SignUpForm onClose={onClose} /> // Show the signup popup
+        <SignUpForm onClose={handleCloseSignup} />
       )}
     </>
   );

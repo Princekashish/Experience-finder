@@ -20,8 +20,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose }) => {
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
-
     const { email, password } = loginData;
 
     if (!email || !password) {
@@ -36,7 +34,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose }) => {
         password
       );
       console.log("User created: ", userCredential.user);
-      onClose(); // Close the popup on successful signup
+      onClose(); 
     } catch (err: any) {
       setError(err.message);
       console.error("Sign up error: ", err.message);

@@ -9,9 +9,12 @@ import LoginForm from "../../components/shared/Form/LoginForm";
 import FormInput from "../../components/base/FormInput";
 import FormButton from "../../components/base/FormButton";
 import { CgSpinner } from "react-icons/cg";
+import AuthStatus from "../../components/custom/AuthStatus";
 
 const Learning: React.FC = () => {
   const [dialogbox, setDialogbox] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [learningData, setLearningData] = useState({
     subject: "",
@@ -29,25 +32,12 @@ const Learning: React.FC = () => {
     setLearningData({ ...learningData, [name]: value });
     console.log(learningData);
   };
-
-  // Handle user authentication and save UID in state/localStorage
-  // const handleAuth = (isAuthenticated: boolean, uid?: string | null) => {
-  //   setIsUser(isAuthenticated);
-  //   if (isAuthenticated && uid) {
-  //     setUserUID(uid);
-  //     localStorage.setItem("user", uid);
-  //   } else {
-  //     setUserUID(null);
-  //     localStorage.removeItem("user");
-  //   }
-  // };
-
   // Generate relaxation plan if the user is authenticated
   const generatePlan = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const user = localStorage.getItem("user");
-    if (!user) {
+    if (!isAuthenticated) {
+      toast.error("You need to log in to generate a plan.");
       setDialogbox(true);
       return;
     }
@@ -95,12 +85,29 @@ const Learning: React.FC = () => {
 
     navigate(`/dashboard/Learning/${docID}`);
   };
+
+  const handleAuthChange = (
+    isAuthenticated: boolean,
+    userEmail?: string | null
+  ) => {
+    setIsAuthenticated(isAuthenticated);
+    if (userEmail !== undefined) {
+      setUserEmail(userEmail);
+    } else {
+      setUserEmail(null);
+    }
+  };
   return (
     <div>
       <>
-        {/* <AuthStatus onAuthChange={handleAuth} /> */}
+        <AuthStatus onAuthChange={handleAuthChange} />
         <div className=" flex  flex-col justify-start items-start  ">
-          {dialogbox && <LoginForm onClose={() => setDialogbox(false)} />}
+          {dialogbox && (
+            <LoginForm
+              onAuthChange={handleAuthChange}
+              onClose={() => setDialogbox(false)}
+            />
+          )}
           <div className=" md:text-[2em] xl:text-start text-center w-full   md:w-full">
             <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
               Learning Plan
