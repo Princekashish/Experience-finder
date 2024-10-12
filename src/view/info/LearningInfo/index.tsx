@@ -15,19 +15,19 @@ export const imgroot =
 const LearningInfo: React.FC<info> = ({ LearingData }) => {
   return (
     <div className="">
-      <div className="">
-        <div className="flex  gap-5 flex-wrap p-5 ">
+      <div className=" flex ">
+        <div className="flex flex-wrap  gap-2  p-2 ">
           <h1 className="rounded-full px-3 py-2 border flex justify-center items-center gap-2">
             <NotebookText />
-            {LearingData?.userSelected?.subject} Place
+            {LearingData?.userSelected?.subject} 
           </h1>
           <h1 className="rounded-full px-3 py-2 border flex justify-center items-center gap-2 ">
             <Calendar />
-            {LearingData?.userSelected?.month} Duration
+            {LearingData?.userSelected?.month} 
           </h1>
           <h1 className="rounded-full px-3 py-2 border  flex justify-center items-center gap-2">
             <CalendarClock />
-            {LearingData?.userSelected?.hourperday} People
+            {LearingData?.userSelected?.hourperday} hour
           </h1>
         </div>
       </div>

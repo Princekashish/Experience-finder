@@ -10,6 +10,7 @@ import FormInput from "../../components/base/FormInput";
 import FormButton from "../../components/base/FormButton";
 import { CgSpinner } from "react-icons/cg";
 import AuthStatus from "../../components/custom/AuthStatus";
+import ScrollTop from "../../lib/ScrollTop";
 
 const Learning: React.FC = () => {
   const [dialogbox, setDialogbox] = useState<boolean>(false);
@@ -100,6 +101,7 @@ const Learning: React.FC = () => {
   return (
     <div>
       <AuthStatus onAuthChange={handleAuthChange} />
+      <ScrollTop/>
       <div className="flex flex-col justify-start items-start">
         {dialogbox && (
           <LoginForm
@@ -130,13 +132,13 @@ const Learning: React.FC = () => {
               />
             </div>
             <div className="flex flex-col gap-5">
-              <h1>Over how many months do you plan to study?</h1>
+              <h1>Over how many months/Day do you plan to study?</h1>
               <FormInput
                 type="text"
                 name="month"
                 value={learningData.month}
                 onChange={handleInputChange}
-                placeholder="For Exam or For Months"
+                placeholder="For Exam or For Months or Day"
                 className="px-3 py-3 border-[.3px] w-full border-black"
               />
             </div>

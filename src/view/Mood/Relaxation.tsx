@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import AuthStatus from "../../components/custom/AuthStatus";
 import LoginForm from "../../components/shared/Form/LoginForm";
+import ScrollTop from "../../lib/ScrollTop";
 
 const Relaxation: React.FC = () => {
   const [dialogbox, setDialogbox] = useState<boolean>(false);
@@ -119,6 +120,7 @@ const Relaxation: React.FC = () => {
     <>
       <div className="flex flex-col justify-start items-start">
         <AuthStatus onAuthChange={handleAuthChange} />
+        <ScrollTop/>
         <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
             Adventure

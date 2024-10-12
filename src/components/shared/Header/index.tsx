@@ -35,21 +35,21 @@ const Header: React.FC = () => {
           <img
             src="/logo-black.png"
             alt=""
-            className="w-[134px] md:w-[243px]"
+            className="w-[169px] md:w-[243px]"
           />
         </Link>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <AuthStatus onAuthChange={handleAuthChange} />
         {isUserLoggedIn && userEmail && (
-          <span className="ml-3 text-black">{userEmail}</span>
+          <span className="ml-3 text-black text-xs">{userEmail}</span>
         )}
 
         <FormButton
           type="button"
           label={isUserLoggedIn ? "Logout" : "Log In"}
           onClick={isUserLoggedIn ? handleLogout : () => navigate("/")}
-          className="bg-[#F5F5F5] px-3 py-2 font-intra rounded-full text-base text-black capitalize"
+          className={`bg-[#F5F5F5] px-3 py-2 font-intra rounded-full text-base ${isUserLoggedIn ? 'text-red-500' : ''} capitalize`}
         />
       </div>
     </div>
