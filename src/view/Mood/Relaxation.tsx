@@ -132,7 +132,7 @@ const Relaxation: React.FC = () => {
         <div className="flex md:w-full p-5 md:justify-center justify-center w-full">
           <form
             onSubmit={generatePlan}
-            className="flex flex-col gap-5 md:w-3/5"
+            className="flex flex-col w-full gap-5 md:w-3/5"
           >
             {/* Form inputs go here */}
             <div className="flex flex-col gap-5">
@@ -143,7 +143,7 @@ const Relaxation: React.FC = () => {
                 placeholder="🗺️ Location"
                 value={formData.place}
                 onChange={handleInputChange}
-                className="px-3 py-3 border-[.3px] w-full border-black"
+                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
               />
             </div>
 
@@ -155,7 +155,7 @@ const Relaxation: React.FC = () => {
                 value={formData.people}
                 onChange={handleInputChange}
                 placeholder="🧑‍🤝‍🧑 Number of People"
-                className="px-3 py-3 border-[.3px] w-full border-black"
+                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
               />
             </div>
 
@@ -166,7 +166,7 @@ const Relaxation: React.FC = () => {
                 name="duration"
                 value={formData.duration}
                 onChange={handleInputChange}
-                className="px-3 w-full py-3 border-[.3px] border-black"
+                className="px-3 w-full py-3 border-[.3px] border-zinc-300 bg-black"
                 placeholder="⌚ Duration"
               />
             </div>
@@ -183,7 +183,7 @@ const Relaxation: React.FC = () => {
                 className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer accent-blue-500"
               />
               <div>
-                <span className="text-black text-sm font-medium">
+                <span className="text-zinc-300 text-sm font-medium">
                   Rs. {formData.budget}
                 </span>
               </div>
@@ -200,7 +200,7 @@ const Relaxation: React.FC = () => {
                     }
                     className={`flex flex-col h-[120px] justify-center items-center rounded-xl shadow shadow-white cursor-pointer ${
                       formData.planningWith === item.value
-                        ? "border-black border-[1px]"
+                        ? "border-zinc-300 bg-black border-[1px]"
                         : ""
                     }`}
                   >
@@ -215,7 +215,7 @@ const Relaxation: React.FC = () => {
             <FormButton
               type="submit"
               disabled={loading}
-              className="hover:bg-zinc-900 bg-black px-3 py-3 w-full rounded-lg flex justify-center items-center text-white"
+              className="hover:bg-zinc-900 bg-zinc-900 px-3 py-3 w-full rounded-lg flex justify-center items-center text-white "
               startIcon={
                 loading ? <CgSpinner className="animate-spin" /> : null
               } // Show spinner when loading

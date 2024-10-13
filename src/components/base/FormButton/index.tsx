@@ -1,6 +1,7 @@
 import React from "react";
 
 interface ButtonProps {
+  id?:string,
   type?: "submit" | "button";
   label?: string;
   disabled?: boolean;
@@ -17,11 +18,12 @@ const FormButton: React.FC<ButtonProps> = ({
   disabled,
   className,
   children,
+  id,
   startIcon, // Destructure the icon prop
 }) => {
   return (
     <div className="flex justify-center items-center ">
-      <button
+      <button id={id}
         type={type}
         onClick={onClick}
         disabled={disabled}

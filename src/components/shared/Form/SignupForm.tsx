@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import FormInput from "../../base/FormInput";
 import FormButton from "../../base/FormButton";
 import { auth } from "../../../lib/config/Firebase";
+import ScrollTop from "../../../lib/ScrollTop";
 
 interface SignUpFormProps {
   onClose: () => void;
@@ -48,8 +49,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose }) => {
 
   return (
     <div className=" backdrop-blur-lg bg-black absolute top-0 h-screen w-full left-0 flex justify-center items-center ">
-      <div className=" bg-white w-[420px] h-[290px] gap-5 flex flex-col justify-center items-start p-5 rounded-2xl">
-        <h1 className="text-2xl font-bold">SignUp</h1>
+      <ScrollTop/>
+      <div className=" bg-gradient-to-b from-gray-400 to-gray-900 w-[420px] h-[290px] gap-5 flex flex-col justify-center items-start p-5 rounded-2xl">
+        <h1 className="text-2xl font-bold text-white">SignUp</h1>
         <form
           onSubmit={handleSignUp}
           className="flex flex-col justify-center gap-5  w-full"
@@ -60,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose }) => {
             value={loginData.email}
             onChange={handleOnChange}
             placeholder="Email"
-            className="border-black border py-2 px-2"
+            className="border-black border bg-black  py-2 px-2"
           />
           <FormInput
             type="password"
@@ -68,10 +70,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onClose }) => {
             value={loginData.password}
             onChange={handleOnChange}
             placeholder="Password"
-            className="border-black border py-2 px-2"
+            className="border-black bg-black border  py-2 px-2"
           />
           {error && <p className="text-red-500">{error}</p>}
-          <FormButton label="Sign Up" className="bg-black text-white w-full py-3 rounded-lg"/>
+          <FormButton label="Sign Up" className="bg-green-600 text-white w-full py-3 rounded-lg"/>
         </form>
       </div>
     </div>

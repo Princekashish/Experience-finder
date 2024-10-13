@@ -109,7 +109,7 @@ const Learning: React.FC = () => {
           />
         )}
         <div className="md:text-[2em] xl:text-start text-center w-full md:w-full">
-          <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
+          <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
             Learning Plan
           </h1>
           
@@ -128,7 +128,7 @@ const Learning: React.FC = () => {
                 placeholder="Topic name"
                 value={learningData.subject}
                 onChange={handleInputChange}
-                className="px-3 py-3 border-[.3px] w-full border-black"
+                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
               />
             </div>
             <div className="flex flex-col gap-5">
@@ -139,7 +139,7 @@ const Learning: React.FC = () => {
                 value={learningData.month}
                 onChange={handleInputChange}
                 placeholder="For Exam or For Months or Day"
-                className="px-3 py-3 border-[.3px] w-full border-black"
+                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
               />
             </div>
             <div className="flex flex-col gap-5">
@@ -149,14 +149,14 @@ const Learning: React.FC = () => {
                 name="hourperday"
                 value={learningData.hourperday}
                 onChange={handleInputChange}
-                className="px-3 py-3 border-[.3px] w-full border-black"
+                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
                 placeholder="Example: 2 hours, 3 hours"
               />
             </div>
             <FormButton
               type="submit"
               disabled={loading}
-              className="bg-black hover:bg-zinc-900 px-3 py-3 w-full text-white rounded-lg flex justify-center items-center"
+              className="bg-zinc-900 hover:bg-zinc-900 px-3 py-3 w-full text-white rounded-lg flex justify-center items-center"
               startIcon={
                 loading ? <CgSpinner className="animate-spin" /> : null
               }
