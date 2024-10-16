@@ -32,7 +32,7 @@ interface relaxationPlan {
 // Details component
 const Details: React.FC<relaxationPlan> = ({ plan }) => {
   return (
-    <div>
+    <div className="p-5">
       <h1 className="ml-2 font-bold text-xl">Days Plans :</h1>
       <div className="p-2 md:grid md:gap-3">
         {plan?.AiDatas?.itinerary?.map((dayPlan: DayPlan, index: number) => (

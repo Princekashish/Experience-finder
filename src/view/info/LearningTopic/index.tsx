@@ -32,13 +32,13 @@ const LearningTopic: React.FC<LearningTopicProps> = ({ plan }) => {
   const topics = plan?.AiDatas?.topics || [];
 
   return (
-    <div className="grid  mt-6 grid-cols-1 xl:grid-cols-2 gap-5 p-2 xl:p-5 ">
+    <div className="grid  mt-6 grid-cols-1 xl:grid-cols-2 gap-5 p-2 xl:p-5  ">
       {topics.map((topic, index) => (
         <div
           key={index}
-          className="bg-zinc-100 pt-5 flex flex-col justify-center items-center gap-5 rounded-2xl shadow-md"
+          className="bg-zinc-900 pt-5  border border-zinc-500 flex flex-col justify-center items-center gap-5 rounded-2xl shadow-md"
         >
-          <h1 className="text-xl font-bold text-center bg-gray-300 rounded-xl py-2 px-5">
+          <h1 className="text-xl font-bold text-center bg-gray-400 text-black rounded-xl py-2 px-5">
             Topic {index + 1}
           </h1>
 

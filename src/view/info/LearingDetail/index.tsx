@@ -16,7 +16,7 @@ const LearningDetail: React.FC<LearingPlan> = ({ topicSequence }) => {
       <div className="flex flex-wrap gap-5 p-5">
         {topics.map((topic, i) => (
           <div key={i} className="">
-            <h1 className="bg-gray-200 shadow-md rounded-xl  p-2 font-semibold ">
+            <h1 className="border border-zinc-400 shadow-md rounded-xl  p-2 font-semibold ">
               {topic}
             </h1>
           </div>
