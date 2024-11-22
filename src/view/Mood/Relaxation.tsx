@@ -23,7 +23,7 @@ const Relaxation: React.FC = () => {
     planningWith: "",
     relaxationType: "",
     duration: "",
-    budget: "500",
+    budget: "1000",
   });
 
   const navigate = useNavigate();
@@ -136,7 +136,7 @@ const Relaxation: React.FC = () => {
           >
             {/* Form inputs go here */}
             <div className="flex flex-col gap-5">
-              <h1>Where would you like to relax?</h1>
+              <h1>Where would you like to go?</h1>
               <FormInput
                 type="text"
                 name="place"
@@ -167,7 +167,7 @@ const Relaxation: React.FC = () => {
                 value={formData.duration}
                 onChange={handleInputChange}
                 className="px-3 w-full py-3 border-[.3px] border-zinc-300 bg-black"
-                placeholder="⌚ Duration"
+                placeholder="⌚ Duration or Days"
               />
             </div>
 
@@ -177,7 +177,7 @@ const Relaxation: React.FC = () => {
                 type="range"
                 name="budget"
                 min="0"
-                max="5000"
+                max="10000"
                 value={formData.budget}
                 onChange={handleBudgetChange}
                 className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer accent-blue-500"

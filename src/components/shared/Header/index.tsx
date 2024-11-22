@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           label={isUserLoggedIn ? "Logout" : "Log In"}
           onClick={isUserLoggedIn ? handleLogout : () => navigate("/")}
           className={` px-4 py-2 text-black font-semibold shadow-white relative right-5 font-intra rounded-full text-sm  ${
-            isUserLoggedIn ? "text-red-500 bg-zinc-800" : "bg-zinc-300"
+            isUserLoggedIn ? "text-red-500 bg-zinc-800" : ""
           } capitalize`}
         />
       </div>
