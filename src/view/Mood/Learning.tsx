@@ -35,6 +35,8 @@ const Learning: React.FC = () => {
       checkUsercredits(user.uid);
     }
   }, [navigate]);
+  console.log(userEmail);
+  
 
   const checkUsercredits = async (uid: string) => {
     const userDocRef = doc(db, "users", uid);
@@ -132,7 +134,7 @@ const Learning: React.FC = () => {
     userEmail?: string | null
   ) => {
     setIsAuthenticated(isAuthenticated);
-    if (userEmail !== undefined) {
+    if (userEmail  !== undefined) {
       setUserEmail(userEmail);
     } else {
       setUserEmail(null);

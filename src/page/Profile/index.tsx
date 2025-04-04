@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "../../lib/config/Firebase";
 import {
   doc,
@@ -12,10 +12,8 @@ import {
 import { User } from "firebase/auth";
 // import { format } from "date-fns";
 import {
-  User as UserIcon,
   CreditCard,
   History,
-  Activity,
   ArrowUp,
   ArrowDown,
   CheckCircle,
@@ -40,12 +38,6 @@ interface PaymentHistory {
   plan: string;
 }
 
-interface UserActivity {
-  id: string;
-  type: "trip" | "learning_plan" | "generation";
-  title: string;
-  timestamp: Date;
-}
 
 interface LearningData {
   id: string;
@@ -146,12 +138,12 @@ const ProfilePage = () => {
   // Handle auth state changes
   const handleAuthChange = async (
     isAuthenticated: boolean,
-    email?: string | null,
+    userEmail?: string | null,
     photoURL?: string,
     displayName?: string,
     uid?: string
   ) => {
-    if (isAuthenticated && uid && !isDataFetched) {
+    if (isAuthenticated && uid && userEmail && photoURL && displayName && !isDataFetched) {
       setUser(auth.currentUser);
       await fetchUserData(uid);
     } else if (!isAuthenticated) {

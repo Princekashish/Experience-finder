@@ -4,7 +4,13 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
 
 interface AuthStatusProps {
-  onAuthChange: (isAuthenticated: boolean, userEmail?: string | null, photoURL?: string, displayName?: string, uid?: string) => void;
+  onAuthChange: (
+    isAuthenticated: boolean,
+    userEmail?: string | null,
+    photoURL?: string,
+    displayName?: string,
+    uid?: string
+  ) => void;
 }
 
 const AuthStatus: React.FC<AuthStatusProps> = ({ onAuthChange }) => {
@@ -15,7 +21,13 @@ const AuthStatus: React.FC<AuthStatusProps> = ({ onAuthChange }) => {
         await createOrGetUserProfile(user);
 
         // Pass user info to parent component including uid
-        onAuthChange(true, user.email || undefined, user.photoURL || undefined, user.displayName || undefined, user.uid);
+        onAuthChange(
+          true,
+          user.email || undefined,
+          user.photoURL || undefined,
+          user.displayName || undefined,
+          user.uid
+        );
       } else {
         onAuthChange(false);
       }

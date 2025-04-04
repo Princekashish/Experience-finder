@@ -1,31 +1,25 @@
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithPopup,
+  GoogleAuthProvider
 } from "firebase/auth";
 import FormInput from "../../base/FormInput";
-import FormButton from "../../base/FormButton";
 import { auth } from "../../../lib/config/Firebase";
 import ScrollTop from "../../../lib/ScrollTop";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginData, setLoginData] = useState<{
-    email: string;
-    password: string;
-  }>({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+const navigate = useNavigate()
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { email, password } = loginData;
+    const { email, password } = formData;
 
     if (!email || !password) {
       setError("Email and Password are required");
@@ -39,6 +33,7 @@ const SignUpForm: React.FC = () => {
         password
       );
       console.log("User created: ", userCredential.user);
+      // You might want to redirect the user after successful signup
     } catch (err: any) {
       setError(err.message);
       console.error("Sign up error: ", err.message);
@@ -47,21 +42,28 @@ const SignUpForm: React.FC = () => {
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlegoooglesignup = () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => console.log(`${result}success`))
-      .catch((error) => {
-        console.log(`${error}failed`);
+  const handleGoogleSignup = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account'
       });
+      
+      const result = await signInWithPopup(auth, provider);
+      navigate("/");
+      console.log("Google signup successful:", result);
+      // You might want to redirect the user after successful signup
+    } catch (error: any) {
+      setError(error.message);
+      console.error("Google signup failed:", error);
+    }
   };
 
   return (
-    <div className=" backdrop-blur-lg bg-black absolute top-0 h-screen w-full left-0 flex justify-center items-center ">
+    <div className="backdrop-blur-lg bg-black absolute top-0 h-screen w-full left-0 flex justify-center items-center">
       <ScrollTop />
       <div className="flex justify-center items-center min-h-screen">
         <div className="w-full max-w-md p-6 flex flex-col items-center">
@@ -76,9 +78,15 @@ const SignUpForm: React.FC = () => {
             <h1 className="text-4xl font-bold">Finder</h1>
           </div>
 
+          {error && (
+            <div className="w-full mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {error}
+            </div>
+          )}
+
           {/* Google Sign In Button */}
           <button
-            onClick={handlegoooglesignup}
+            onClick={handleGoogleSignup}
             className="flex gap-3 items-center justify-center w-full bg-white border border-gray-300 rounded-2xl p-3 mb-4 hover:bg-gray-50"
           >
             <svg
@@ -114,25 +122,27 @@ const SignUpForm: React.FC = () => {
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
 
-          {/* Login Form */}
-          <form className="w-full">
+          {/* Sign Up Form */}
+          <form onSubmit={handleSignUp} className="w-full">
             <div className="mb-4">
               <FormInput
                 type="email"
+                name="email"
                 placeholder="Email"
                 className="w-full p-3 border border-gray-300 rounded-2xl"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleOnChange}
               />
             </div>
 
             <div className="mb-4 relative">
               <FormInput
                 type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="Password"
                 className="w-full p-3 border border-gray-300 rounded-2xl"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleOnChange}
               />
               <button
                 type="button"
@@ -172,22 +182,13 @@ const SignUpForm: React.FC = () => {
                 )}
               </button>
             </div>
-            {/* Password Recovery and Sign Up Links */}
-            <div className="flex justify-between mb-6 text-sm">
-              <a href="#" className="text-gray-600 hover:underline">
-                Forgot Password?
-              </a>
-              <a href="#" className="text-gray-600 hover:underline">
-                Don't have an account? Sign up
-              </a>
-            </div>
 
             {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-gray-800 text-white p-3 rounded-2xl hover:bg-gray-700"
             >
-              Continue with email
+              Sign Up
             </button>
           </form>
 

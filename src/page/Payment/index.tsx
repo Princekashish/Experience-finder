@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Check } from "lucide-react";
 import { auth } from "../../lib/config/Firebase";
-import {  useNavigate } from "react-router-dom";
-import { doc, getDoc, setDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../../lib/config/Firebase";
+
+declare global {
+    interface Window {
+      Razorpay: any;
+    }
+  }
 
 // Define types for our pricing plan data
 type PricingPlan = {
@@ -22,7 +35,6 @@ const PricingPage = () => {
   const [loading, setLoading] = useState(false);
   const currentUser = auth.currentUser;
   const navigate = useNavigate();
- 
 
   // All data comes from this array
   const pricingPlans: PricingPlan[] = [
@@ -131,8 +143,8 @@ const PricingPage = () => {
       };
 
       // Dynamically load the Razorpay script
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => {
         const razorpayInstance = new window.Razorpay(options);
         razorpayInstance.open(); // Open the Razorpay payment modal
@@ -185,7 +197,12 @@ const PricingPage = () => {
           });
 
           // Record payment history
-          const paymentHistoryRef = collection(db, "users", userId, "paymentHistory");
+          const paymentHistoryRef = collection(
+            db,
+            "users",
+            userId,
+            "paymentHistory"
+          );
           await addDoc(paymentHistoryRef, {
             amount: plan.price,
             status: "success",
@@ -194,7 +211,12 @@ const PricingPage = () => {
           });
 
           // Record credit history
-          const creditHistoryRef = collection(db, "users", userId, "creditHistory");
+          const creditHistoryRef = collection(
+            db,
+            "users",
+            userId,
+            "creditHistory"
+          );
           await addDoc(creditHistoryRef, {
             amount: plan.credits,
             type: "add",
@@ -207,10 +229,16 @@ const PricingPage = () => {
           const userDoc = await getDoc(userRef);
           if (userDoc.exists()) {
             const currentCredits = userDoc.data()?.credits || 0;
-            await setDoc(userRef, {
-              ...userDoc.data(),
-              credits: currentCredits + plan.credits
-            }, { merge: true });
+            await setDoc(
+              userRef,
+              {
+                ...userDoc.data(),
+                credits: currentCredits,
+              },
+              { merge: true }
+            );
+            
+            
           }
 
           alert("Payment successful! Credits have been added to your account.");
@@ -219,9 +247,15 @@ const PricingPage = () => {
           alert("User not found.");
         }
       } else {
+        const userId = auth.currentUser?.uid;
         // Record failed payment
         if (userId) {
-          const paymentHistoryRef = collection(db, "users", userId, "paymentHistory");
+          const paymentHistoryRef = collection(
+            db,
+            "users",
+            userId,
+            "paymentHistory"
+          );
           await addDoc(paymentHistoryRef, {
             amount: plan.price,
             status: "failed",

@@ -9,7 +9,6 @@ import { db, auth } from "../../lib/config/Firebase";
 import { useNavigate } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import AuthStatus from "../../components/custom/AuthStatus";
-import LoginForm from "../../components/shared/Form/LoginForm";
 import ScrollTop from "../../lib/ScrollTop";
 
 const Relaxation: React.FC = () => {
@@ -160,7 +159,7 @@ const Relaxation: React.FC = () => {
         <ScrollTop />
         <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
-            Adventure
+           hi {userEmail} Adventure
           </h1>
           <p className="xl:text-lg text-sm tracking-wider text-center">
             Plan your Adventure day using AI
