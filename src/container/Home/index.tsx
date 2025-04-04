@@ -22,7 +22,7 @@ const index: React.FC = () => {
   // }, []);
 
   const handleButtonClick = () => {
-    navigate("/dasboard");
+    navigate("/dashboard");
   };
   return (
     <div>

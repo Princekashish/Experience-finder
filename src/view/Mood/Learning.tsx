@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AI_Prompt_Learning } from "../../lib/data";
 import { chatSession } from "../../lib/Service/Aimodel";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../lib/config/Firebase";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { db, auth } from "../../lib/config/Firebase";
 import LoginForm from "../../components/shared/Form/LoginForm";
 import FormInput from "../../components/base/FormInput";
 import FormButton from "../../components/base/FormButton";
@@ -22,8 +22,32 @@ const Learning: React.FC = () => {
     month: "",
     hourperday: "",
   });
+  const [usercredits, setUsercredits] = useState<number>(0);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) {
+      navigate("/auth/login");
+    } else {
+      setUserEmail(user.email);
+      checkUsercredits(user.uid);
+    }
+  }, [navigate]);
+
+  const checkUsercredits = async (uid: string) => {
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      setUsercredits(userData?.credits || 0);
+    } else {
+      // Set initial credits if not set
+      await setDoc(userDocRef, { credits: 10 });
+      setUsercredits(10); // Default to 10 credits
+    }
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -41,6 +65,12 @@ const Learning: React.FC = () => {
       return;
     }
 
+    if (usercredits < 5) {
+      toast.error("You don't have enough credits. Please top up to generate a plan.");
+      navigate("/payment");
+      return;
+    }
+
     if (
       !learningData.subject ||
       !learningData.month ||
@@ -50,6 +80,7 @@ const Learning: React.FC = () => {
       setLoading(false);
       return;
     }
+
     setLoading(true);
 
     const FINAL_PROMPT = AI_Prompt_Learning.replace(
@@ -61,7 +92,8 @@ const Learning: React.FC = () => {
 
     try {
       const result = await chatSession.sendMessage(FINAL_PROMPT);
-      SaveAIData(result?.response?.text());
+      await SaveAIData(result?.response?.text());
+      await deductcredits(); // Deduct credits after plan is generated
       setLoading(false);
     } catch (error) {
       toast.error("Error generating plan.");
@@ -72,7 +104,7 @@ const Learning: React.FC = () => {
   const SaveAIData = async (AiData: any) => {
     setLoading(true);
     const docID = Date.now().toString();
-    const uid = localStorage.getItem("user");
+    const uid = auth.currentUser?.uid;
 
     await setDoc(doc(db, "AiData_Learning", docID), {
       userSelected: learningData,
@@ -82,6 +114,17 @@ const Learning: React.FC = () => {
     });
     setLoading(false);
     navigate(`/dashboard/Learning/${docID}`);
+  };
+
+  const deductcredits = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      await updateDoc(userDocRef, {
+        credits: usercredits - 5, // Deduct 5 credits
+      });
+      setUsercredits(usercredits - 5); // Update local state
+    }
   };
 
   const handleAuthChange = (
@@ -95,31 +138,23 @@ const Learning: React.FC = () => {
       setUserEmail(null);
     }
   };
-  console.log(userEmail);
-  
 
   return (
     <div>
       <AuthStatus onAuthChange={handleAuthChange} />
-      <ScrollTop/>
+      <ScrollTop />
       <div className="flex flex-col justify-start items-start">
-        {dialogbox && (
-          <LoginForm
-            onClose={() => setDialogbox(false)}
-          />
-        )}
+        {dialogbox && <LoginForm />}
         <div className="md:text-[2em] xl:text-start text-center w-full md:w-full">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5 ">
             Learning Plan
           </h1>
-          
         </div>
         <div className="flex md:w-full p-5 md:justify-center">
           <form
             onSubmit={generatePlan}
             className="flex flex-col gap-5 md:w-3/5"
           >
-            {/* Form inputs */}
             <div className="flex flex-col gap-5">
               <h1>What subject(s) do you want to study?</h1>
               <FormInput
@@ -157,9 +192,7 @@ const Learning: React.FC = () => {
               type="submit"
               disabled={loading}
               className="bg-zinc-900 hover:bg-zinc-900 px-3 py-3 w-full text-white rounded-lg flex justify-center items-center"
-              startIcon={
-                loading ? <CgSpinner className="animate-spin" /> : null
-              }
+              startIcon={loading ? <CgSpinner className="animate-spin" /> : null}
             >
               {loading ? "Loading..." : "Generate Your Plan"}
             </FormButton>
