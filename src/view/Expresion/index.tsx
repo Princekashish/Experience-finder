@@ -28,7 +28,7 @@ interface NorthSouthTrip {
 
 const Expresion: React.FC = () => {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [randomDestinations, setRandomDestinations] = useState<Destination[]>([]);
   const [indiaDestinations, setIndiaDestinations] = useState<IndiaDestination[]>([]);
   const [northsouthtrip, setNorthSouthTrip] = useState<NorthSouthTrip[]>([]);
@@ -90,9 +90,6 @@ const Expresion: React.FC = () => {
     navigate(`/dashboard/${mood}`);
   };
 
-  if (loading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  }
 
   return (
     <>
