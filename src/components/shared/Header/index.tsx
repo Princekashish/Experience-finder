@@ -78,8 +78,8 @@ const Header: React.FC = () => {
 
   // Log the userName and userProfileUrl when the state changes
   useEffect(() => {
-    console.log(userName);
-    console.log(userProfileUrl);
+    // console.log(userName);
+    // console.log(userProfileUrl);
   }, [userName, userProfileUrl]);
 
   useEffect(() => {

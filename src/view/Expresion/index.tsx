@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "../../components/base/FormButton";
-import AuthStatus from "../../components/custom/AuthStatus";
+import { useAuth } from "../../hooks/useAuth";
 import top_tripe from "../../../Top_April- July.json";
 import { fetchLocationImage } from "../../lib/utils/unsplash";
 import Hiddentrip from "../../../Hidden_gem.json";
 import NorthSouthTrip from "../../../NorthSouth.json";
 import testimonials from "../../../testimonials.json";
-import { User } from "firebase/auth";
-import { auth } from "../../lib/config/Firebase";
+
 interface Destination {
   name: string;
   country: string;
@@ -29,13 +28,9 @@ interface NorthSouthTrip {
 
 const Expresion: React.FC = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-  const [randomDestinations, setRandomDestinations] = useState<Destination[]>(
-    []
-  );
-  const [indiaDestinations, setIndiaDestinations] = useState<
-    IndiaDestination[]
-  >([]);
+  const { user, loading } = useAuth();
+  const [randomDestinations, setRandomDestinations] = useState<Destination[]>([]);
+  const [indiaDestinations, setIndiaDestinations] = useState<IndiaDestination[]>([]);
   const [northsouthtrip, setNorthSouthTrip] = useState<NorthSouthTrip[]>([]);
 
   useEffect(() => {
@@ -84,33 +79,18 @@ const Expresion: React.FC = () => {
       setNorthSouthTrip(destinationsWithImages);
     };
 
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-
     getRandomDestinations();
     hiddenTrip();
     SouthTrip();
-
-    return () => unsubscribe();
   }, []);
 
   const navigatemood = (mood: string) => {
     navigate(`/dashboard/${mood}`);
   };
 
-  const handleAuthChange = (
-    isAuthenticated: boolean,
-    userEmail?: string | null,
-    photoURL?: string | null,
-    displayName?: string | null
-  ) => {
-    setUser(
-      isAuthenticated
-        ? ({ email: userEmail, photoURL, displayName } as User)
-        : null
-    );
-  };
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
 
   return (
     <>
@@ -119,7 +99,7 @@ const Expresion: React.FC = () => {
           <h1 className="text-[4em] font-bold tracking-tighter">
             Hey,{" "}
             <span className="text-yellow-500">
-              {user?.displayName || "Guest"}{" "}
+              {user?.displayName || "Guest"}
             </span>
             <br /> your personal trip planner
           </h1>
@@ -287,7 +267,7 @@ const Expresion: React.FC = () => {
           </h1>
           <div className="grid grid-cols-4 gap-4">
             {testimonials.testimonials
-              .sort(() => Math.random() - 0.5)
+              .sort(() => Math.random())
               .slice(0, 4)
               .map((items, i) => {
                 return (
@@ -310,7 +290,6 @@ const Expresion: React.FC = () => {
           </div>
         </div>
       </div>
-      <AuthStatus onAuthChange={handleAuthChange} />
     </>
   );
 };
