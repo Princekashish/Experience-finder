@@ -30,10 +30,14 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="text-center xl:text-sm text-xs text-zinc-400">
-        <h1>All Copyright are reserved by Prince Kashish © 2024 </h1>
+        <h1> © 2025 Prince Kashish. All rights reserved. </h1>
       </div>
     </div>
   );
 };
 
 export default Footer;
+
+
+
+

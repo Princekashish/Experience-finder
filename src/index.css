@@ -9,3 +9,15 @@
     scroll-behavior: smooth;
     box-sizing: border-box;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* In your global CSS or Tailwind custom styles */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+

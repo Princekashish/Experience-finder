@@ -1,0 +1,169 @@
+{
+    "destinations": [
+      {
+        "name": "Delhi",
+        "state": "Delhi (Union Territory)",
+        "top_attractions": [
+          "India Gate",
+          "Qutub Minar",
+          "Humayun's Tomb",
+          "Red Fort",
+          "Lotus Temple"
+        ],
+        "best_time_to_visit": "October to March",
+        "type": "Historical, Cultural",
+        "side": "North"
+      },
+      {
+        "name": "Agra",
+        "state": "Uttar Pradesh",
+        "top_attractions": [
+          "Taj Mahal",
+          "Agra Fort",
+          "Fatehpur Sikri",
+          "Mehtab Bagh"
+        ],
+        "best_time_to_visit": "October to March",
+        "type": "Historical",
+        "side": "North"
+      },
+      {
+        "name": "Jaipur",
+        "state": "Rajasthan",
+        "top_attractions": [
+          "Amber Fort",
+          "Hawa Mahal",
+          "City Palace",
+          "Jantar Mantar",
+          "Nahargarh Fort"
+        ],
+        "best_time_to_visit": "October to March",
+        "type": "Historical, Cultural",
+        "side": "North"
+      },
+      {
+        "name": "Varanasi",
+        "state": "Uttar Pradesh",
+        "top_attractions": [
+          "Ganges River Ghats (Dasaswamedh Ghat)",
+          "Kashi Vishwanath Temple",
+          "Sarnath",
+          "Evening Ganga Aarti"
+        ],
+        "best_time_to_visit": "October to March",
+        "type": "Spiritual, Cultural",
+        "side": "North"
+      },
+      {
+        "name": "Goa",
+        "state": "Goa",
+        "top_attractions": [
+          "Baga Beach",
+          "Calangute Beach",
+          "Old Goa Churches (Basilica of Bom Jesus)",
+          "Dudhsagar Falls",
+          "Anjuna Flea Market"
+        ],
+        "best_time_to_visit": "November to February",
+        "type": "Beach, Relaxation, Nightlife",
+        "side": "South"
+      },
+      {
+        "name": "Kerala Backwaters (Alleppey)",
+        "state": "Kerala",
+        "top_attractions": [
+          "Houseboat Cruise",
+          "Vembanad Lake",
+          "Alleppey Beach",
+          "Paddy Fields",
+          "Pathiramanal Island"
+        ],
+        "best_time_to_visit": "September to March",
+        "type": "Nature, Relaxation",
+        "side": "South"
+      },
+      {
+        "name": "Mumbai",
+        "state": "Maharashtra",
+        "top_attractions": [
+          "Gateway of India",
+          "Marine Drive",
+          "Elephanta Caves",
+          "Chhatrapati Shivaji Maharaj Terminus (CST)",
+          "Siddhivinayak Temple"
+        ],
+        "best_time_to_visit": "October to March",
+        "type": "City, Cultural, Historical",
+        "side": "South"
+      },
+      {
+        "name": "Rishikesh",
+        "state": "Uttarakhand",
+        "top_attractions": [
+          "Lakshman Jhula & Ram Jhula",
+          "Triveni Ghat (Ganga Aarti)",
+          "Yoga Ashrams (e.g., Parmarth Niketan)",
+          "White Water Rafting",
+          "Neer Garh Waterfall"
+        ],
+        "best_time_to_visit": "September to November, February to April",
+        "type": "Spiritual, Adventure, Yoga",
+        "side": "North"
+      },
+      {
+        "name": "Udaipur",
+        "state": "Rajasthan",
+        "top_attractions": [
+          "City Palace",
+          "Lake Pichola (Boat Ride)",
+          "Jag Mandir",
+          "Jagdish Temple",
+          "Saheliyon-ki-Bari"
+        ],
+        "best_time_to_visit": "September to March",
+        "type": "Historical, Romantic, Cultural",
+        "side": "North"
+      },
+      {
+        "name": "Ladakh (Leh)",
+        "state": "Ladakh (Union Territory)",
+        "top_attractions": [
+          "Pangong Tso Lake",
+          "Nubra Valley",
+          "Leh Palace",
+          "Shanti Stupa",
+          "Thiksey Monastery"
+        ],
+        "best_time_to_visit": "June to September",
+        "type": "Adventure, Nature, Spiritual",
+        "side": "North"
+      },
+      {
+          "name": "Amritsar",
+          "state": "Punjab",
+          "top_attractions": [
+            "Golden Temple (Harmandir Sahib)",
+            "Wagah Border Ceremony",
+            "Jallianwala Bagh",
+            "Central Sikh Museum"
+          ],
+          "best_time_to_visit": "October to March",
+          "type": "Spiritual, Historical",
+          "side": "North"
+        },
+        {
+          "name": "Mysore",
+          "state": "Karnataka",
+          "top_attractions": [
+            "Mysore Palace",
+            "Brindavan Gardens",
+            "Chamundi Hills (Chamundeshwari Temple)",
+            "Mysore Zoo (Sri Chamarajendra Zoological Gardens)"
+          ],
+          "best_time_to_visit": "October to February",
+          "type": "Historical, Cultural",
+          "side": "South"
+        }
+    ]
+  }
+  

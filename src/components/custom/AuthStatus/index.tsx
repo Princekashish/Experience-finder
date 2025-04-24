@@ -6,7 +6,7 @@ import { User } from "firebase/auth";
 interface AuthStatusProps {
   onAuthChange: (
     isAuthenticated: boolean,
-    userEmail?: string | null,
+    userEmail?: string,
     photoURL?: string,
     displayName?: string,
     uid?: string

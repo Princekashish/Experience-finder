@@ -43,7 +43,7 @@ const LoginForm: React.FC = () => {
       const result = await signInWithPopup(authInstance, provider);
      console.log(result.user.uid);
      
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Google SignIn Error:", error);
     }

@@ -57,7 +57,7 @@ const HomePage: React.FC<heroSubmit> = ({ handleSubmit }) => {
         className="fixed w-3 h-3 bg-white rounded-full pointer-events-none  "
         style={{ transform: "translate(-50%, -50%)", zIndex: 1000 }}
       /> */}
-      <section className="overflow-hidden h-[75vh] md:h-[80vh] flex flex-col xl:gap-10 md:flex-row justify-center items-center text-center px-6 font-intra">
+      <section className="overflow-hidden h-[75vh] md:h-[90vh] flex flex-col xl:gap-10 md:flex-row justify-center items-center text-center px-6 font-intra">
         <div className=" md:w-3/2">
           <div className=" ">
             <h1
@@ -81,7 +81,7 @@ const HomePage: React.FC<heroSubmit> = ({ handleSubmit }) => {
             id="hbtn"
             onClick={handleSubmit}
             label="Start Your Thought"
-            className="bg-[#00501E] rounded-full py-3 font-semibold text-base p-3 text-white  w-[230px] flex justify-center items-center"
+            className="bg-[#00501E] rounded-full py-4 border-gray-300 border-[0.5px]   font-semibold text-base p-3 text-white  w-[230px] flex justify-center items-center"
             startIcon={<Telescope size={25} color="#C8A0FF" />}
           />
         </div>

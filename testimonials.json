@@ -1,0 +1,71 @@
+{
+    "testimonials": [
+      {
+        "name": "Amit R.",
+        "location": "Mumbai",
+        "traveler_type": "Solo Traveller",
+        "testimonial": "I usually spend hours planning my trips, but this AI trip planner made it effortless. It curated a perfect solo adventure through Rajasthan, and even suggested offbeat spots I would've never found on my own. 10/10!"
+      },
+      {
+        "name": "Sara D.",
+        "location": "Bengaluru",
+        "traveler_type": "Family Vacationer",
+        "testimonial": "Planning a family trip with kids is usually chaotic. But this tool took care of everything — kid-friendly attractions, food stops, and even nap breaks! It’s like having a personal travel assistant who gets me."
+      },
+      {
+        "name": "John M.",
+        "location": "New York",
+        "traveler_type": "First-Time India Visitor",
+        "testimonial": "I was nervous about navigating India, but the AI planner customized a South India itinerary that balanced culture, comfort, and cuisine. I felt confident every step of the way. Super helpful!"
+      },
+      {
+        "name": "Neha & Karan",
+        "location": "Delhi",
+        "traveler_type": "Honeymooners",
+        "testimonial": "We wanted a romantic yet adventurous honeymoon. The AI planned a stunning trip through Kerala with just the right mix of beaches, tea gardens, and luxury stays. Way better than any travel agent."
+      },
+      {
+        "name": "Priya S.",
+        "location": "Chennai",
+        "traveler_type": "Budget Backpacker",
+        "testimonial": "This AI tool is a dream for backpackers. It suggested local stays, free attractions, and cheap but tasty eats. I saved money and still had the best experience ever!"
+      },
+      {
+        "name": "Carlos G.",
+        "location": "Spain",
+        "traveler_type": "Spiritual Seeker",
+        "testimonial": "I asked for a spiritual journey, and the planner delivered a route through Varanasi, Rishikesh, and Bodh Gaya — complete with meditation spots and ashram stays. Felt deeply personalized."
+      },
+      {
+        "name": "Jessica P.",
+        "location": "Sydney",
+        "traveler_type": "Nature Lover",
+        "testimonial": "This AI planner helped me organize a nature-filled trip to the Himalayas. From trekking routes to hidden lakes, it tailored every detail to my love for adventure and scenic beauty. A must-try!"
+      },
+      {
+        "name": "David L.",
+        "location": "London",
+        "traveler_type": "Cultural Explorer",
+        "testimonial": "As a lover of history and culture, I was looking for a unique experience in India. The AI planner set me up with an amazing cultural trail from Delhi to Jaipur, including historical sites I never knew existed!"
+      },
+      {
+        "name": "Lina M.",
+        "location": "Paris",
+        "traveler_type": "Luxury Traveler",
+        "testimonial": "The AI trip planner gave me a seamless luxury experience in India. From private tours to 5-star hotels, everything was curated perfectly, and I didn’t have to worry about a single detail!"
+      },
+      {
+        "name": "Tom S.",
+        "location": "Los Angeles",
+        "traveler_type": "Adventure Enthusiast",
+        "testimonial": "I’m an adrenaline junkie, and this AI planner put together a thrilling adventure trip that included white-water rafting in Rishikesh and paragliding in Manali. It was an unforgettable experience!"
+      },
+      {
+        "name": "Ravi K.",
+        "location": "Chandigarh",
+        "traveler_type": "Weekend Traveler",
+        "testimonial": "I just needed a quick weekend getaway, and the AI planner helped me find a perfect 3-day trip to the hills of Himachal. It recommended places that I would never have thought of on my own!"
+      }
+    ]
+  }
+  

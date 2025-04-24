@@ -24,7 +24,7 @@ const FormInput: React.FC<FormInputProps> = ({
       value={value}
       onChange={onChange}
       name={name}
-      className={` outline-none   ${className}`}
+      className={` outline-none  rounded-2xl  ${className}`}
     />
   );
 };

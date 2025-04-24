@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { auth } from "../../lib/config/Firebase";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +12,10 @@ import {
 import { db } from "../../lib/config/Firebase";
 
 declare global {
-    interface Window {
-      Razorpay: any;
-    }
+  interface Window {
+    Razorpay: any;
   }
+}
 
 // Define types for our pricing plan data
 type PricingPlan = {
@@ -24,7 +23,6 @@ type PricingPlan = {
   name: string;
   price: number;
   credits: number;
-  interval: string;
   description: string;
   featured?: boolean;
   features: string[];
@@ -32,7 +30,6 @@ type PricingPlan = {
 };
 
 const PricingPage = () => {
-  const [loading, setLoading] = useState(false);
   const currentUser = auth.currentUser;
   const navigate = useNavigate();
 
@@ -41,9 +38,8 @@ const PricingPage = () => {
     {
       id: "starter",
       name: "Starter",
-      price: 15,
+      price: 100,
       credits: 50,
-      interval: "month",
       description: "Get started with essential features",
       features: [
         "Priority support",
@@ -56,9 +52,8 @@ const PricingPage = () => {
     {
       id: "pro",
       name: "Pro",
-      price: 40,
+      price: 500,
       credits: 250,
-      interval: "quarter",
       description: "For growing businesses",
       featured: true,
       features: [
@@ -73,9 +68,8 @@ const PricingPage = () => {
     {
       id: "premium",
       name: "Premium",
-      price: 120,
+      price: 1000,
       credits: 500,
-      interval: "year",
       description: "For enterprises and power users",
       features: [
         "Unlimited data storage",
@@ -92,8 +86,6 @@ const PricingPage = () => {
 
   // Function to handle Razorpay payment
   const handlePayment = async (plan: PricingPlan) => {
-    setLoading(true);
-
     // Request backend to create Razorpay order
     try {
       const response = await fetch("http://localhost:5000/api/create-order", {
@@ -154,8 +146,6 @@ const PricingPage = () => {
       console.error("Error during payment process:", error);
       alert("Payment failed. Please try again.");
     }
-
-    setLoading(false);
   };
 
   // Function to verify payment
@@ -237,8 +227,6 @@ const PricingPage = () => {
               },
               { merge: true }
             );
-            
-            
           }
 
           alert("Payment successful! Credits have been added to your account.");
@@ -271,7 +259,7 @@ const PricingPage = () => {
     }
   };
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center p-6">
+    <div className=" min-h-screen flex flex-col items-center justify-center p-6">
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="text-5xl font-bold mb-4">Purchase Credits</h1>
         <p className="text-gray-400 text-xl">
@@ -280,9 +268,14 @@ const PricingPage = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-6xl mt-5">
         {pricingPlans.map((plan) => (
-          <div key={plan.id} className="bg-[#393838] rounded-3xl p-8 relative">
+          <div
+            key={plan.id}
+            className={`bg-white/10 rounded-3xl p-8 relative ${
+              plan.id === "pro" ? "relative bottom-5" : ""
+            }`}
+          >
             {plan.featured && (
               <div className="absolute -top-3 right-8 bg-yellow-500 text-black px-4 py-1 rounded-full text-sm font-medium">
                 Popular
@@ -291,9 +284,8 @@ const PricingPage = () => {
             <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
             <div className="flex items-baseline">
               <span className="text-6xl font-bold">₹{plan.price}</span>
-              <span className="text-gray-400 ml-2">/{plan.interval}</span>
             </div>
-            <h1 className="mt-2 text-gray-300 font-semibold">
+            <h1 className="mt-2 text-gray-600 font-semibold">
               Credits: {plan.credits}
             </h1>
 
@@ -303,12 +295,9 @@ const PricingPage = () => {
                 plan.isPopular
                   ? "bg-yellow-500 hover:bg-yellow-600"
                   : "bg-gray-800"
-              } text-white py-3 rounded-2xl mb-6 ${
-                loading ? "bg-gray-600 cursor-not-allowed" : ""
-              }`}
-              disabled={loading}
+              } text-white py-3 rounded-2xl mb-6`}
             >
-              {loading ? "Processing..." : `Get ${plan.name}`}
+              Get {plan.name}
             </button>
 
             <ul className="space-y-3">

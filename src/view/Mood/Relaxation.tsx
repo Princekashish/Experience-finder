@@ -10,16 +10,17 @@ import { useNavigate } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import AuthStatus from "../../components/custom/AuthStatus";
 import ScrollTop from "../../lib/ScrollTop";
+import LocationAutocomplete from "../../components/custom/Auto";
 
 const Relaxation: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
-    place: "",
+    fromLocation: "",
+    toLocation: "",
     people: "",
     planningWith: "",
-    relaxationType: "",
     duration: "",
     budget: "1000",
   });
@@ -33,6 +34,7 @@ const Relaxation: React.FC = () => {
     if (!user) {
       navigate("/auth/login");
     } else {
+      setIsAuthenticated(true);
       setUserEmail(user.email);
       checkUsercredits(user.uid);
     }
@@ -73,17 +75,21 @@ const Relaxation: React.FC = () => {
     }
 
     if (usercredits < 5) {
-      toast.error("You don't have enough credits. Please top up to generate a plan.");
+      toast.error(
+        "You don't have enough credits. Please top up to generate a plan."
+      );
       navigate("/payment");
       return;
     }
 
     // Validate form data
     if (
-      (Number(formData.duration) > 10 && !formData.place) ||
+      !formData.fromLocation ||
+      !formData.toLocation ||
       !formData.duration ||
       !formData.planningWith ||
-      !formData.budget
+      !formData.budget ||
+      !formData.people
     ) {
       toast.error("All Fields are Required.");
       setLoading(false);
@@ -94,15 +100,21 @@ const Relaxation: React.FC = () => {
 
     // Create AI prompt and get the plan
     const FINAL_PROMPT = AI_Prompt_Relaxation.replace(
-      "{location}",
-      formData.place
+      "{fromLocation}",
+      formData.fromLocation
     )
+      .replace("{toLocation}", formData.toLocation)
       .replace("{duration}", formData.duration)
+      .replace("{people}", formData.people)
       .replace("{goingWith}", formData.planningWith)
-      .replace("{price}", formData.budget);
+      .replace("{budget}", formData.budget);
+
+    console.log(FINAL_PROMPT);
 
     try {
       const result = await chatSession.sendMessage(FINAL_PROMPT);
+      const aiResponse = result?.response?.text();
+      console.log(aiResponse);
       await SaveAIData(result?.response?.text());
       await deductcredits(); // Deduct 5 credits after generating the plan
       setLoading(false);
@@ -117,11 +129,28 @@ const Relaxation: React.FC = () => {
     setLoading(true);
     const docID = Date.now().toString();
     const uid = auth.currentUser?.uid;
+    let parsedAiData;
+
+    try {
+      const cleanedAiData = AiData.replace(/```json|```/g, "").trim();
+      parsedAiData = JSON.parse(cleanedAiData); // Attempt to parse it as JSON
+    } catch (error) {
+      // If it's not valid JSON, treat it as plain text
+      console.warn("AI data is not valid JSON, storing as plain text.", error);
+      parsedAiData = { text: AiData }; // Store the plain text in a JSON format
+    }
+
+    console.log("Data to be saved:", {
+      userSelected: formData,
+      AiDatas: parsedAiData,
+      user: uid,
+      id: docID,
+    });
 
     // Save the cleaned and parsed data to Firestore
     await setDoc(doc(db, "AiData_Relax", docID), {
       userSelected: formData,
-      AiDatas: JSON.parse(AiData),
+      AiDatas: parsedAiData,
       user: uid,
       id: docID,
     });
@@ -157,12 +186,13 @@ const Relaxation: React.FC = () => {
       <div className="flex flex-col justify-start items-start">
         <AuthStatus onAuthChange={handleAuthChange} />
         <ScrollTop />
+        <h1 className="hidden">{userEmail}</h1>
         <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
-           hi {userEmail} Adventure
+            Adventure Planner
           </h1>
           <p className="xl:text-lg text-sm tracking-wider text-center">
-            Plan your Adventure day using AI
+            Plan your thrilling outdoor adventure using AI
           </p>
         </div>
         <div className="flex md:w-full p-5 md:justify-center justify-center w-full">
@@ -172,14 +202,23 @@ const Relaxation: React.FC = () => {
           >
             <div className="flex flex-col gap-5">
               <h1>Where would you like to go?</h1>
-              <FormInput
-                type="text"
-                name="place"
-                placeholder="🗺️ Location"
-                value={formData.place}
-                onChange={handleInputChange}
-                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
-              />
+              <div className="flex gap-3">
+                <LocationAutocomplete
+                  name="fromLocation"
+                  placeholder="🗺️ From Location"
+                  value={formData.fromLocation}
+                  onChange={handleInputChange}
+                  className="px-3 py-3  bg-white/10  w-full border-zinc-300 outline-none  rounded-2xl "
+                />
+
+                <LocationAutocomplete
+                  name="toLocation"
+                  placeholder="🗺️ To Location"
+                  value={formData.toLocation}
+                  onChange={handleInputChange}
+                  className="px-3 py-3  bg-white/10 w-full border-zinc-300 outline-none  rounded-2xl  "
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-5">
@@ -190,7 +229,7 @@ const Relaxation: React.FC = () => {
                 value={formData.people}
                 onChange={handleInputChange}
                 placeholder="🧑‍🤝‍🧑 Number of People"
-                className="px-3 py-3 border-[.3px] w-full border-zinc-300 bg-black"
+                className="px-3 py-3  w-full border-zinc-300 bg-white/10"
               />
             </div>
 
@@ -201,7 +240,7 @@ const Relaxation: React.FC = () => {
                 name="duration"
                 value={formData.duration}
                 onChange={handleInputChange}
-                className="px-3 w-full py-3 border-[.3px] border-zinc-300 bg-black"
+                className="px-3 w-full py-3  border-zinc-300 bg-white/10 "
                 placeholder="⌚ Duration or Days"
               />
             </div>
@@ -212,7 +251,7 @@ const Relaxation: React.FC = () => {
                 type="range"
                 name="budget"
                 min="0"
-                max="10000"
+                max="50000"
                 value={formData.budget}
                 onChange={handleBudgetChange}
                 className="w-full h-[2px] bg-gray-300 rounded-lg appearance-none duration-500 cursor-pointer accent-blue-500"
@@ -226,16 +265,16 @@ const Relaxation: React.FC = () => {
 
             <div className="w-full">
               <h1>Who Are You Planning With?</h1>
-              <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 p-5">
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 mt-3">
                 {planningWithOptions.map((item, index) => (
                   <div
                     key={index}
                     onClick={() =>
                       setFormData({ ...formData, planningWith: item.value })
                     }
-                    className={`flex flex-col h-[120px] justify-center items-center rounded-xl shadow shadow-white cursor-pointer ${
+                    className={`flex gap-2 justify-center items-center bg-white/10 rounded-3xl py-2 cursor-pointer ${
                       formData.planningWith === item.value
-                        ? "border-zinc-300 bg-black border-[1px]"
+                        ? "border-yellow-600  border-[1px]"
                         : ""
                     }`}
                   >
@@ -245,12 +284,16 @@ const Relaxation: React.FC = () => {
                 ))}
               </div>
             </div>
-
+            <p className=" text-sm text-gray-500 ">
+              <span className="text-red-600">5 coin will deduct</span>
+            </p>
             <FormButton
               type="submit"
               disabled={loading}
-              className="hover:bg-zinc-900 bg-zinc-900 px-3 py-3 w-full rounded-lg flex justify-center items-center text-white "
-              startIcon={loading ? <CgSpinner className="animate-spin" /> : null}
+              className="hover:bg-zinc-900 bg-zinc-900  py-3 w-full  rounded-xl flex justify-center items-center text-white "
+              startIcon={
+                loading ? <CgSpinner className="animate-spin" /> : null
+              }
             >
               {loading ? "Loading..." : "Generate Your Plan 🛫"}
             </FormButton>
