@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "../../components/base/FormButton";
 import { useAuth } from "../../hooks/useAuth";
@@ -32,6 +32,8 @@ const Expresion: React.FC = () => {
   const [randomDestinations, setRandomDestinations] = useState<Destination[]>([]);
   const [indiaDestinations, setIndiaDestinations] = useState<IndiaDestination[]>([]);
   const [northsouthtrip, setNorthSouthTrip] = useState<NorthSouthTrip[]>([]);
+
+  const userName = useMemo(() => user?.displayName || "Guest", [user?.displayName]);
 
   useEffect(() => {
     const getRandomDestinations = async () => {
@@ -99,7 +101,7 @@ const Expresion: React.FC = () => {
           <h1 className="text-[4em] font-bold tracking-tighter">
             Hey,{" "}
             <span className="text-yellow-500">
-              {user?.displayName || "Guest"}
+              {userName}
             </span>
             <br /> your personal trip planner
           </h1>
