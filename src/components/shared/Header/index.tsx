@@ -14,12 +14,11 @@ const Header: React.FC = () => {
   const [headerBackground, setHeaderBackground] =
     useState<string>("transparent"); // Added state for header background
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [location, setLocation] = useState<{
-    code: string;
-    name: string;
-  } | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+
+  // Fixed location for India
+  const location = { code: "IN", name: "India" };
 
   const handleAuthChange = async (
     isAuthenticated: boolean,
@@ -81,7 +80,6 @@ const Header: React.FC = () => {
   useEffect(() => {
     console.log(userName);
     console.log(userProfileUrl);
-    fetchUserLocation();
   }, [userName, userProfileUrl]);
 
   useEffect(() => {
@@ -100,19 +98,6 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const fetchUserLocation = async () => {
-    try {
-      const response = await fetch("https://ipapi.co/json/");
-      const data = await response.json();
-      const countryCode = data.country_code || "US"; // Default to 'US' if no country code
-      const countryName = data.country_name || "United States"; // Get the full country name
-      setLocation({ code: countryCode, name: countryName });
-    } catch (error) {
-      console.error("Error fetching location:", error);
-      setLocation({ code: "IN", name: "India" }); // Fallback if error occurs
-    }
   };
 
   return (
@@ -240,21 +225,17 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Language selector (US flag) */}
+        {/* Language selector (India) */}
         <div
           className="relative flex items-center justify-center w-8 h-8 rounded-full border border-gray-200"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Display the country code */}
-          {location && (
-            <span className="text-sm font-ligh">{location.code}</span>
-          )}
-
-          {/* Custom tooltip to show the country name on hover */}
-          {isHovered && location && (
-            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded-md ">
-              {location.name} {/* Display the full country name */}
+          <span className="text-sm font-light">{location.code}</span>
+          
+          {isHovered && (
+            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded-md">
+              {location.name}
             </div>
           )}
         </div>
