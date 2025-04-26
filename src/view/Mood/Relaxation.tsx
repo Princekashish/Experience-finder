@@ -113,8 +113,6 @@ const Relaxation: React.FC = () => {
 
     try {
       const result = await chatSession.sendMessage(FINAL_PROMPT);
-      const aiResponse = result?.response?.text();
-      // console.log(aiResponse);
       await SaveAIData(result?.response?.text());
       await deductcredits(); // Deduct 5 credits after generating the plan
       setLoading(false);
