@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 * {
-    scrollbar-color: #8e8e8e #fff;
+    scrollbar-color: #2d2c2c #000000;
     scrollbar-width: thin;
     scroll-behavior: smooth;
     box-sizing: border-box;

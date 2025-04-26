@@ -97,7 +97,7 @@ const Restaurants: React.FC<RelaxationPlan> = ({ plan }) => {
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="relative rounded-3xl overflow-hidden shadow-lg bg-white">
+        <div className="relative rounded-3xl overflow-hidden shadow-lg  bg-zinc-900">
           <img
             src={imageUrl}
             alt={restaurant.name}
@@ -107,16 +107,16 @@ const Restaurants: React.FC<RelaxationPlan> = ({ plan }) => {
                 "https://via.placeholder.com/800x600?text=Restaurant+Image"; // Fallback for broken images
             }}
           />
-          <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-md">
+          <div className="absolute top-4 right-4 bg-white text-black px-3 py-1 rounded-full shadow-md">
             <span className="text-yellow-500">★</span>
             <span className="ml-1 font-semibold">{restaurant.rating}</span>
           </div>
 
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          <div className="p-6 ">
+            <h2 className="text-xl font-bold text-gray-100 mb-2">
               {restaurant.name}
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-300 mb-4 text-sm">
               {
                 restaurant.description.substring(0, 47) +
                   "..." /* Shorten description */
@@ -161,8 +161,8 @@ const Restaurants: React.FC<RelaxationPlan> = ({ plan }) => {
   };
 
   return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
+    <div className="p-10 ">
+      <h1 className="text-3xl text-start font-bold mb-8 text-white  ">
         Food & drink
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -96,26 +96,26 @@ const Hotels: React.FC<RelaxationPlan> = ({ plan }) => {
         transition={{ duration: 0.3 }}
 
       >
-        <div className="relative rounded-3xl  p-2 ">
+        <div className="relative rounded-3xl overflow-hidden bg-zinc-900">
           <img
             src={imageUrl}
             alt={hotel.name}
-            className="w-full h-64 object-cover rounded-3xl"
+            className="w-full h-64 object-cover rounded-t-3xl"
             onError={(e) => {
               (e.target as HTMLImageElement).src =
                 "https://via.placeholder.com/800x600?text=Hotel+Image";
             }}
           />
-          <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-md">
+          <div className="absolute top-4 right-4 bg-white px-3 text-black py-1 rounded-full shadow-md">
             <span className="text-yellow-500">★</span>
-            <span className="ml-1 font-semibold">{hotel.rating}</span>
+            <span className="ml-1 font-semibold ">{hotel.rating}</span>
           </div>
 
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          <div className="p-6 ">
+            <h2 className="text-xl font-bold text-gray-100 mb-2">
               {hotel.name}
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-200 mb-4 text-sm">
               {hotel.description.length > 10
                 ? `${hotel.description.substring(0, 77)}...`
                 : `${hotel.description}`}
@@ -171,7 +171,7 @@ const Hotels: React.FC<RelaxationPlan> = ({ plan }) => {
 
   return (
     <div className="p-10 ">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
+      <h1 className="text-3xl font-bold mb-8 text-white ">
         Places to stay
       </h1>
       <Swiper

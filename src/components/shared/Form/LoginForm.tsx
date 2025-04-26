@@ -29,7 +29,7 @@ const LoginForm: React.FC = () => {
         email,
         password
       );
-      console.log("User logged in: ", userCredential.user);
+      // console.log("User logged in: ", userCredential.user);
       navigate("/dashboard");
     } catch (err: any) {
       setError(err.message || "Login failed. Please try again.");
@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(authInstance, provider);
-     console.log(result.user.uid);
+    //  console.log(result.user.uid);
      
       navigate("/dashboard");
     } catch (error) {

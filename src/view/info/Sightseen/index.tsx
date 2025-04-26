@@ -65,8 +65,8 @@ const Sightseeing: React.FC<RelaxationPlan> = ({ plan }) => {
   }
 
   return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
+    <div className="p-10 mt-10">
+      <h1 className="text-3xl font-bold mb-8 text-white ">
         Things to do
       </h1>
 

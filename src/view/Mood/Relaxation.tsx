@@ -109,12 +109,12 @@ const Relaxation: React.FC = () => {
       .replace("{goingWith}", formData.planningWith)
       .replace("{budget}", formData.budget);
 
-    console.log(FINAL_PROMPT);
+    // console.log(FINAL_PROMPT);
 
     try {
       const result = await chatSession.sendMessage(FINAL_PROMPT);
       const aiResponse = result?.response?.text();
-      console.log(aiResponse);
+      // console.log(aiResponse);
       await SaveAIData(result?.response?.text());
       await deductcredits(); // Deduct 5 credits after generating the plan
       setLoading(false);
@@ -140,12 +140,12 @@ const Relaxation: React.FC = () => {
       parsedAiData = { text: AiData }; // Store the plain text in a JSON format
     }
 
-    console.log("Data to be saved:", {
-      userSelected: formData,
-      AiDatas: parsedAiData,
-      user: uid,
-      id: docID,
-    });
+    // console.log("Data to be saved:", {
+    //   userSelected: formData,
+    //   AiDatas: parsedAiData,
+    //   user: uid,
+    //   id: docID,
+    // });
 
     // Save the cleaned and parsed data to Firestore
     await setDoc(doc(db, "AiData_Relax", docID), {
@@ -187,15 +187,15 @@ const Relaxation: React.FC = () => {
         <AuthStatus onAuthChange={handleAuthChange} />
         <ScrollTop />
         <h1 className="hidden">{userEmail}</h1>
-        <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full">
+        <div className="md:text-[2em] xl:text-start md:w-full flex flex-col justify-center items-center gap-3 w-full mt-8">
           <h1 className="font-bold text-[1.8em] leading-none text-center mt-5">
             Adventure Planner
           </h1>
-          <p className="xl:text-lg text-sm tracking-wider text-center">
+          <p className="xl:text-lg text-sm tracking-wider text-center hidden md:block">
             Plan your thrilling outdoor adventure using AI
           </p>
         </div>
-        <div className="flex md:w-full p-5 md:justify-center justify-center w-full">
+        <div className="flex md:w-full p-5 md:justify-center justify-center w-full mt-5">
           <form
             onSubmit={generatePlan}
             className="flex flex-col w-full gap-5 md:w-3/5"

@@ -185,10 +185,10 @@ const Header: React.FC = () => {
         </div>
       </div> */}
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3  relative right-2 md:right-0">
         <AuthStatus onAuthChange={handleAuthChange} />
         {/* For Partners text with icon */}
-        <div className="hidden md:flex items-center gap-2 relative group cursor-pointer">
+        <div className="hidden md:flex items-center gap-2 relative group cursor-pointer ">
           <svg
             className="w-5 h-5 text-white"
             viewBox="0 0 24 24"
@@ -227,7 +227,7 @@ const Header: React.FC = () => {
 
         {/* Language selector (India) */}
         <div
-          className="relative flex items-center justify-center w-8 h-8 rounded-full border border-gray-200"
+          className="relative flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 "
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -300,7 +300,7 @@ const Header: React.FC = () => {
 
       {/* Mobile menu - optional */}
       {isMenuOpen && (
-        <div className="absolute top-full mt-2 right-7 w-48 bg-white/10 rounded-xl shadow-xl z-20">
+        <div className="absolute top-full mt-2 right-7 w-48 bg-zinc-900 rounded-xl shadow-xl z-20">
           <ul className="flex flex-col p-2 ">
             {navbar.map((item, index) => (
               <li

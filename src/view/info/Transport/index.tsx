@@ -144,13 +144,13 @@ const Details: React.FC<RelaxationPlan> = ({ plan }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ duration: 0.3, delay: idx * 0.1 }}
-        className="p-6 border rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 
-          bg-white backdrop-blur-sm bg-opacity-90 mb-4"
+        className="p-6  rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 
+          bg-zinc-900 backdrop-blur-sm bg-opacity-90 mb-4"
       >
-        <h2 className="text-xl font-bold capitalize mb-4 text-gray-800">
+        <h2 className="text-xl font-bold capitalize mb-4 text-gray-100">
           {option.mode}
         </h2>
-        <div className="border-b border-gray-100 pb-4 mb-4 space-y-2">
+        <div className=" border-gray-100 pb-4 ">
           {!isInternal && (
             <>
               <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ const Details: React.FC<RelaxationPlan> = ({ plan }) => {
             </>
           )}
           <div className="flex items-center gap-2">
-            <span className="text-gray-500">Price:</span>
+            <span className="text-gray-200">Price:</span>
             <span className="text-blue-600 font-semibold">
               ₹
               <span className="text-blue-600 font-semibold">
@@ -187,7 +187,7 @@ const Details: React.FC<RelaxationPlan> = ({ plan }) => {
             </span>
           </div>
         </div>
-        <p className="text-gray-600 mb-4 leading-relaxed">
+        <p className="text-gray-200 mb-4 leading-relaxed">
           {option.description}
         </p>
 
@@ -201,13 +201,13 @@ const Details: React.FC<RelaxationPlan> = ({ plan }) => {
           </div>
         ) : (
           <>
-            <div className="bg-green-50 p-4 rounded-lg mb-3">
+            <div className="bg-green-100/10 p-4 rounded-3xl mb-2 ">
               <p className="text-green-700">
                 <strong className="block mb-1">Pros</strong>
                 {(option as RegularTransportOption).pros}
               </p>
             </div>
-            <div className="bg-red-50 p-4 rounded-lg">
+            <div className="bg-red-100/10  p-4 rounded-3xl">
               <p className="text-red-700">
                 <strong className="block mb-1">Cons</strong>
                 {(option as RegularTransportOption).cons}
@@ -221,7 +221,7 @@ const Details: React.FC<RelaxationPlan> = ({ plan }) => {
 
   return (
     <div className="p-10 ">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
+      <h1 className="text-3xl font-bold mb-8 text-white text-start">
         Transport Options
       </h1>
 

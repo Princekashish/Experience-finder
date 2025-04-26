@@ -89,10 +89,10 @@ const Information: React.FC<RelaxationPlan> = ({ plan }) => {
         </div>
         {/* Weather Icon */}
         <div
-          className="absolute top-4 right-28 z-20 cursor-pointer border bg-white/10 rounded-full flex justify-center items-center h-[60px] w-[60px]"
+          className="absolute top-4 right-10 md:right-28 z-20 cursor-pointer  bg-white/10 rounded-full flex justify-center items-center h-[30px] w-[30px] md:h-[60px] md:w-[60px]"
           onClick={toggleWeather}
         >
-          <img src="/pngwingweather.png" alt="Weather" className="h-[50px]" />
+          <img src="/pngwingweather.png" alt="Weather" className="md:h-[50px] h-[30px]" />
         </div>
 
         {/* Weather Popup */}

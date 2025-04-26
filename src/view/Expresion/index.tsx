@@ -94,8 +94,8 @@ const Expresion: React.FC = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col justify-center items-center p-5 font-intra gap-5">
-        <div className="flex justify-center items-center flex-col text-center h-[70vh]">
-          <h1 className="text-[4em] font-bold tracking-tighter">
+        <div className="flex justify-center items-center flex-col text-center min-h-[60vh] md:h-[70vh]">
+          <h1 className="text-[2em] md:text-[4em] font-bold tracking-tighter">
             Hey,{" "}
             <span className="text-yellow-500">
               {userName}
@@ -116,12 +116,12 @@ const Expresion: React.FC = () => {
         </div>
         <div className="relative bg-[url('https://images.unsplash.com/photo-1625710337446-e7bb1865c9f7?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] w-[85vw] rounded-3xl bg-cover bg-center bg-no-repeat h-[70vh] object-contain">
           <div className="p-5">
-            <h1 className="font-bold text-[2.5em] absolute bottom-14">
+            <h1 className="font-bold  text-[2em] md:text-[2.5em] absolute bottom-14">
               Best Travel Destination in {new Date().getFullYear()}
             </h1>
             <FormButton
               label="Check out"
-              className="absolute left-10 bottom-2 px-5 py-3 bg-gray-50 text-black rounded-3xl"
+              className="absolute left-5 md:left-10 bottom-2 px-5 py-3 bg-gray-50 text-black rounded-3xl"
             />
           </div>
         </div>
@@ -181,7 +181,7 @@ const Expresion: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center gap-10 mt-10 ">
+        <div className="flex justify-center items-center gap-10 mt-10 flex-col md:flex-row">
           <div className="">
             <img
               src="https://plus.unsplash.com/premium_photo-1732899535674-b269decc396f?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -189,7 +189,7 @@ const Expresion: React.FC = () => {
               className="rounded-full h-[340px] w-[340px] object-cover"
             />
           </div>
-          <div className="w-1/2 space-y-4 flex justify-start flex-col items-start">
+          <div className="md:w-1/2 space-y-4 flex justify-start flex-col items-start">
             <h1 className="capitalize text-[2em] font-semibold">
               Your ultimate travel sidekick
             </h1>
@@ -213,8 +213,8 @@ const Expresion: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center w-[85vw] mt-10 gap-10">
-          <div className=" w-[400px] h-[240px] flex flex-col  justify-center items-start rounded-3xl">
+        <div className="flex justify-center items-center w-[85vw] mt-10 gap-10 flex-col md:flex-row ">
+          <div className=" md:w-[400px] h-[240px] flex flex-col  justify-center items-start rounded-3xl ">
             <p className="text-[2em] text-center">
               No more wasting endless hours searching for the perfect trip.
             </p>
@@ -229,7 +229,7 @@ const Expresion: React.FC = () => {
             <img
               src="https://images.unsplash.com/photo-1639829423745-b8b68f8ea5b4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
-              className="h-[430px] rounded-3xl"
+              className="md:h-[430px] rounded-3xl"
             />
           </div>
         </div>
@@ -264,7 +264,7 @@ const Expresion: React.FC = () => {
           <h1 className="text-start text-3xl">
             Cute things people have said about Finder
           </h1>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
             {testimonials.testimonials
               .sort(() => Math.random())
               .slice(0, 4)
