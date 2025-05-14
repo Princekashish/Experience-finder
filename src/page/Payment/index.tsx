@@ -272,9 +272,8 @@ const PricingPage = () => {
         {pricingPlans.map((plan) => (
           <div
             key={plan.id}
-            className={`bg-white/10 rounded-3xl p-8 relative ${
-              plan.id === "pro" ? "relative bottom-5" : ""
-            }`}
+            className={`bg-white/10 rounded-3xl p-8 relative ${plan.id === "pro" ? "relative bottom-5" : ""
+              }`}
           >
             {plan.featured && (
               <div className="absolute -top-3 right-8 bg-yellow-500 text-black px-4 py-1 rounded-full text-sm font-medium">
@@ -291,11 +290,10 @@ const PricingPage = () => {
 
             <button
               onClick={() => handlePayment(plan)}
-              className={`w-full mt-6 ${
-                plan.isPopular
+              className={`w-full mt-6 ${plan.isPopular
                   ? "bg-yellow-500 hover:bg-yellow-600"
                   : "bg-gray-800"
-              } text-white py-3 rounded-2xl mb-6`}
+                } text-white py-3 rounded-2xl mb-6`}
             >
               Get {plan.name}
             </button>

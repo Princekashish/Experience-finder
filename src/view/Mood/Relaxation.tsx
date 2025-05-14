@@ -123,6 +123,8 @@ const Relaxation: React.FC = () => {
     }
   };
 
+
+
   const SaveAIData = async (AiData: any) => {
     setLoading(true);
     const docID = Date.now().toString();
@@ -270,11 +272,10 @@ const Relaxation: React.FC = () => {
                     onClick={() =>
                       setFormData({ ...formData, planningWith: item.value })
                     }
-                    className={`flex gap-2 justify-center items-center bg-white/10 rounded-3xl py-2 cursor-pointer ${
-                      formData.planningWith === item.value
+                    className={`flex gap-2 justify-center items-center bg-white/10 rounded-3xl py-2 cursor-pointer ${formData.planningWith === item.value
                         ? "border-yellow-600  border-[1px]"
                         : ""
-                    }`}
+                      }`}
                   >
                     <h1>{item.label}</h1>
                     <h1>{item.value}</h1>

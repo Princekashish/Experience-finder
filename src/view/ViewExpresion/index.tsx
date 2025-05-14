@@ -8,15 +8,18 @@ import Hotels from "../info/Hotels";
 import Restaurants from "../info/Restrunts";
 import Sightseeing from "../info/Sightseen";
 import ScrollTop from "../../lib/ScrollTop";
+import { DayItineraies } from "../info/Day-by-Day";
 
 const ViewExpresion: React.FC = () => {
   const [aiData, setAiData] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [showItineraries, setShowItineraries] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     if (id) GetAiData(id);
   }, [id]);
+
 
   const GetAiData = async (id: string) => {
     setLoading(true);
@@ -55,6 +58,15 @@ const ViewExpresion: React.FC = () => {
       <Details plan={aiData} />
       <Hotels plan={aiData} />
       <Restaurants plan={aiData} />
+      <div className="flex justify-center my-10">
+        <button
+          onClick={() => setShowItineraries((pre)=>!pre)}
+          className="bg-zinc-900 hover:bg-white/30 text-white font-bold py-3 px-8 rounded-3xl shadow-lg transition"
+        >
+          Generate day-by-day itineraries
+        </button>
+      </div>
+      {showItineraries && <DayItineraies itinerary={aiData?.AiDatas?.itinerary} />}
     </div>
   );
 };

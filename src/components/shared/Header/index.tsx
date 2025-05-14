@@ -28,8 +28,8 @@ const Header: React.FC = () => {
   ) => {
     setIsUserLoggedIn(isAuthenticated);
     setUserEmail(email || null);
-    setUserName(photoURL || null); // Update user name state
-    setUserProfileUrl(displayName || null); // Update user profile URL state
+    setUserName(displayName || null); // Update user name state
+    setUserProfileUrl(photoURL || null); // Update user profile URL state
 
     if (isAuthenticated) {
       // Fetch credits from Firestore when the user is logged in
@@ -70,9 +70,9 @@ const Header: React.FC = () => {
     { text: "Terms of Service", link: "/terms-of-service" },
     ...(isUserLoggedIn
       ? [
-          { text: "Profile", link: "/profile" },
-          { text: "Sign Out", link: "#", onClick: handleLogout },
-        ]
+        { text: "Profile", link: "/profile" },
+        { text: "Sign Out", link: "#", onClick: handleLogout },
+      ]
       : [{ text: "Login", link: "auth/login" }]),
   ];
 
@@ -232,7 +232,7 @@ const Header: React.FC = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <span className="text-sm font-light">{location.code}</span>
-          
+
           {isHovered && (
             <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-gray-700 text-white text-xs px-2 py-1 rounded-md">
               {location.name}
@@ -270,9 +270,8 @@ const Header: React.FC = () => {
             )}
           </div>
           <svg
-            className={`w-5 h-5 transition-transform duration-300 ${
-              isMenuOpen ? "rotate-90" : ""
-            }`}
+            className={`w-5 h-5 transition-transform duration-300 ${isMenuOpen ? "rotate-90" : ""
+              }`}
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -305,9 +304,8 @@ const Header: React.FC = () => {
             {navbar.map((item, index) => (
               <li
                 key={index}
-                className={`p-2 ${
-                  index === 0 || index === 3 ? "border-white/30 border-t" : ""
-                } w-full text-sm`}
+                className={`p-2 ${index === 0 || index === 3 ? "border-white/30 border-t" : ""
+                  } w-full text-sm`}
               >
                 {item.onClick ? (
                   <button
