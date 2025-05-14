@@ -28,8 +28,8 @@ const Header: React.FC = () => {
   ) => {
     setIsUserLoggedIn(isAuthenticated);
     setUserEmail(email || null);
-    setUserName(displayName || null); // Update user name state
-    setUserProfileUrl(photoURL || null); // Update user profile URL state
+    setUserName(photoURL || null); // Update user name state
+    setUserProfileUrl(displayName || null); // Update user profile URL state
 
     if (isAuthenticated) {
       // Fetch credits from Firestore when the user is logged in
