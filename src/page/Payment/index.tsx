@@ -10,6 +10,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../../lib/config/Firebase";
+import ScrollTop from "../../lib/ScrollTop";
 
 declare global {
   interface Window {
@@ -260,6 +261,7 @@ const PricingPage = () => {
   };
   return (
     <div className=" min-h-screen flex flex-col items-center justify-center p-6">
+      <ScrollTop />
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="text-5xl font-bold mb-4">Purchase Credits</h1>
         <p className="text-gray-400 text-xl">
@@ -291,8 +293,8 @@ const PricingPage = () => {
             <button
               onClick={() => handlePayment(plan)}
               className={`w-full mt-6 ${plan.isPopular
-                  ? "bg-yellow-500 hover:bg-yellow-600"
-                  : "bg-gray-800"
+                ? "bg-yellow-500 hover:bg-yellow-600"
+                : "bg-gray-800"
                 } text-white py-3 rounded-2xl mb-6`}
             >
               Get {plan.name}
